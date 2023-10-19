@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Index";
+
+    string[] palabras = ViewBag.Palabras as string[];
+    List<string[]> letrasSeparadas = ViewBag.LetrasSeparadas as List<string[]>;
+
+    Random random = new Random();
+}
+
+<head>
+    <link rel="stylesheet" href="~/assets/css/sopa-de-letras.css" />
+</head>
+<section class="soup-grid" aria-label="Sopa de Letras">
+        <h2>Sopa de Letras</h2>
+        <p>Palabras a Buscar: @string.Join(", ", palabras)</p>
+        <div class="soup-content">
+            <!-- Agrega un contenedor para el contenido -->
+            <table class="soup-table">
+                @for (int row = 0; row < 10; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < 10; col++)
+                        {
+                            <td>
+                                @if (row < letrasSeparadas.Count && col < letrasSeparadas[row].Length)
+                                {
+                                    <button class="soup-cell" onclick="selectLetter(this)">@letrasSeparadas[row][col]</button>
+                                }
+                                else
+                                {
+                                    char letraAzar = (char)('A' + random.Next(26));
+                                    <button class="soup-cell" onclick="selectLetter(this)">@letraAzar</button>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+            <button id="evaluar-button" class="evaluar-button">Evaluar</button>
+        </div>
+</section>
+
+    <script>
+        // Función para seleccionar/deseleccionar letras
+        function selectLetter(element) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected'); // Si ya está seleccionado, quitar la clase 'selected'
+            } else {
+                element.classList.add('selected'); // Si no está seleccionado, añadir la clase 'selected'
+            }
+        }
+
+        function evaluarPalabras() {
+            const letrasSeleccionadas = document.querySelectorAll('.soup-cell.selected');
+            const palabrasValidas = ["LEON", "MONO", "GATO", "PERRO", "ELEFANTE"];
+            const palabrasEncontradas = [];
+
+            letrasSeleccionadas.forEach(letra => {
+                palabrasValidas.forEach(palabra => {
+                    if (palabra.includes(letra.innerText)) {
+                        if (!palabrasEncontradas.includes(palabra)) {
+                            palabrasEncontradas.push(palabra);
+                        }
+                    }
+                });
+            });
+
+            if (palabrasEncontradas.length === palabrasValidas.length) {
+                alert('¡Encontraste todas las palabras!');
+            } else {
+                alert('Aún faltan palabras por encontrar.');
+            }
+
+            letrasSeleccionadas.forEach(letra => {
+                letra.classList.remove('selected');
+            });
+        }
+    </script>
+
+

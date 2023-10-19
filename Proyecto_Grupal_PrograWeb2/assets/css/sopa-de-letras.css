@@ -1,0 +1,75 @@
+﻿.soup-grid {
+    background-color: #2c3e50; /* Cambia el color de fondo al negro/plomo del nav */
+    padding: 20px; /* Espaciado interno de la cuadrícula */
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    min-height: 100vh; /* Cambia a min-height para asegurar suficiente espacio vertical */
+}
+
+.soup-grid-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px;
+}
+
+/* Estilos para la cuadrícula de sopa de letras */
+.soup-table {
+    background-color: #2c3e50; /* Cambia el color de fondo al negro/plomo del nav */
+    padding: 20px; /* Espaciado interno de la cuadrícula */
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    min-height: 100vh; /* Cambia a min-height para asegurar suficiente espacio vertical */
+    border-spacing: 5px; /* Espaciado entre celdas de la tabla */
+}
+
+/* Estilos para la cuadrícula de sopa de letras */
+.soup-cell {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer; /* Cambiamos el cursor para indicar que es clickeable */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+.soup-cell.selected {
+    background-color: #3498db; /* Color de fondo cuando se selecciona */
+}
+
+/* Estilos para el contenedor principal */
+.sopa-container {
+    margin-top: 60px; /* Ajusta el valor según sea necesario para tu diseño */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #2c3e50;
+    text-align: center;
+}
+
+/* Estilos para el botón "Evaluar" */
+.evaluar-button {
+    background-color: #FFD700;
+    color: #000;
+    border: 1px solid #000;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px; /* Ajusta el margen superior del botón para separarlo del contenido superior */
+}
+
+.evaluar-button:hover {
+    background-color: #FFA500;
+}
+
+/* Estilos para el contenido */
+.soup-content {
+    background-color: #2c3e50; /* Fondo para la tabla y el contenido */
+    padding: 20px;
+}
