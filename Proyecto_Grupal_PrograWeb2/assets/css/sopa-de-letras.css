@@ -1,58 +1,69 @@
-﻿.soup-grid {
-    background-color: #2c3e50; /* Cambia el color de fondo al negro/plomo del nav */
-    padding: 20px; /* Espaciado interno de la cuadrícula */
+﻿/* Estilos para el encabezado (nav) */
+.soup-nav {
+    background-color: #333; /* Fondo oscuro para el encabezado */
+    padding: 10px; /* Espaciado interno del encabezado */
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    min-height: 100vh; /* Cambia a min-height para asegurar suficiente espacio vertical */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.soup-grid-container {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 5px;
+/* Estilos para el encabezado (nav) en tabletas y móviles */
+@media (max-width: 767px) {
+    .soup-nav {
+        font-size: 16px; /* Reducir el tamaño del texto en dispositivos más pequeños si es necesario */
+    }
 }
 
-/* Estilos para la cuadrícula de sopa de letras */
-.soup-table {
-    background-color: #2c3e50; /* Cambia el color de fondo al negro/plomo del nav */
-    padding: 20px; /* Espaciado interno de la cuadrícula */
+.regresar-button {
+    color: #000; /* Color del texto Regresar (negro) */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 16px;
+    background-color: #FFA500; /* Fondo anaranjado oscuro */
+    border: none;
+    cursor: pointer;
+    margin-left: auto; /* Mueve el botón a la derecha */
+}
+
+/* Estilos para la sección principal */
+.soup-container {
+    background-color: #2c3e50; /* Fondo oscuro para la sección principal */
+    padding: 20px; /* Espaciado interno de la sección principal */
     display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    min-height: 100vh; /* Cambia a min-height para asegurar suficiente espacio vertical */
-    border-spacing: 5px; /* Espaciado entre celdas de la tabla */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
 }
 
-/* Estilos para la cuadrícula de sopa de letras */
+.soup-title {
+    color: #F3AC08; /* Cambiado a un color claro */
+    font-weight: bold; /* Texto en negrita */
+    font-family: "Arial", sans-serif; /* Cambiado a una fuente diferente (Arial como ejemplo) */
+}
+
+.soup-subtitle {
+    color: #F3AC08; /* Cambiado a un color claro */
+    font-weight: bold; /* Texto en negrita */
+    font-family: "Arial", sans-serif; /* Cambiado a una fuente diferente (Arial como ejemplo) */
+}
+
+/* Estilos para los botones en la tabla */
 .soup-cell {
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background-color: #FFD700; /* Fondo amarillo para los botones */
     border: 1px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    cursor: pointer; /* Cambiamos el cursor para indicar que es clickeable */
+    cursor: pointer;
     transition: background-color 0.3s; /* Transición suave del color de fondo */
 }
 
-.soup-cell.selected {
-    background-color: #3498db; /* Color de fondo cuando se selecciona */
-}
-
-/* Estilos para el contenedor principal */
-.sopa-container {
-    margin-top: 60px; /* Ajusta el valor según sea necesario para tu diseño */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #2c3e50;
-    text-align: center;
-}
+    .soup-cell.selected {
+        background-color: #3498db; /* Color de fondo cuando se selecciona */
+    }
 
 /* Estilos para el botón "Evaluar" */
 .evaluar-button {
@@ -60,16 +71,84 @@
     color: #000;
     border: 1px solid #000;
     padding: 10px 20px;
+    font-weight: bold; /* Texto en negrita */
     font-size: 16px;
-    margin-top: 20px; /* Ajusta el margen superior del botón para separarlo del contenido superior */
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-.evaluar-button:hover {
-    background-color: #FFA500;
-}
+    .evaluar-button:hover {
+        background-color: #FFA500;
+    }
 
-/* Estilos para el contenido */
-.soup-content {
-    background-color: #2c3e50; /* Fondo para la tabla y el contenido */
+/* Estilos para el pie de página (footer) */
+.soup-footer {
+    background-color: #FFD700; /* Fondo amarillo para el footer */
+    color: #333; /* Texto oscuro en el footer */
+    text-align: center;
     padding: 20px;
 }
+
+/* Otros estilos de texto */
+.soup-content p {
+    color: #FFD700; /* Color de texto del párrafo en la sección principal */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Eliminar el borde blanco en el cuerpo, encabezado y pie de página */
+body, .soup-nav, .soup-footer {
+    border: none;
+}
+
+
+
+/* Estilos para el cuadro de diálogo */
+.custom-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscurecido */
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #FFD700; /* Cambiar a amarillo oscuro */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 50%; /* Cambiar a 'max-width' para adaptarse al contenido */
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+    .modal-content p {
+        font-family: 'Helvetica', sans-serif; /* Cambiar a Helvetica o la fuente deseada */
+        font-weight: bold; /* Texto en negrita */
+    }
+
+.close {
+    color: #000; /* Cambiar el color del texto a negro */
+    font-size: 20px; /* Reducir el tamaño de la fuente para hacerlo más pequeño */
+    font-weight: bold; /* Texto en negrita */
+    background-color: #ff0000; /* Agregar un fondo rojo */
+    border-radius: 50%; /* Establecer un radio de borde para hacerlo circular */
+    width: 30px; /* Ajustar el ancho del botón para hacerlo cuadrado */
+    height: 30px; /* Ajustar la altura del botón para hacerlo cuadrado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }

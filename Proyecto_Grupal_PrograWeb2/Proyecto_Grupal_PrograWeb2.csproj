@@ -126,6 +126,7 @@
     <Content Include="assets\images\shop-img-3.jpg" />
     <Content Include="assets\images\shop-img-4.jpg" />
     <Content Include="assets\images\title-underline.png" />
+    <Content Include="assets\img\SopaLetra.png" />
     <Content Include="assets\js\script.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
