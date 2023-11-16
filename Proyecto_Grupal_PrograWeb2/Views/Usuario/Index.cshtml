@@ -1,0 +1,47 @@
+﻿@model List<Proyecto_Grupal_PrograWeb2.Models.usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared2/_Layout.cshtml";
+}
+
+<div style="text-align:start">
+    <h2 class="card-header">
+        <a href="~/USUARIO/AgregarEditar/" class="btn btn-secondary">Nuevo Usuario</a>
+    </h2>
+</div>
+<br />
+<br />
+<table id="DatatableP" class="table">
+    <thead>
+        <tr>
+            <th style="width:50px">Id</th>
+            <th style="width:150px">Nombre</th>
+            <th style="width:160px">Email</th>
+            <th style="width:100px">Clave</th>
+            <th style="width:100px">Estado</th>
+            <th style="width:250px">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <th>@(m.id)</th>
+                <th>@(m.apellido), @(m.nombre)</th>
+                <th>@(m.email)</th>
+                <th>@(m.password)</th>
+                <th>@(m.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="align-content:center;">
+                    <a href="~/USUARIO/Ver/@m.id" class="btn btn-warning">Visualizar</a>
+
+                    <a href="~/USUARIO/AgregarEditar/@m.id" class="btn btn-primary">Modificar</a>
+
+                    <a href="~/USUARIO/Eliminar/@m.id" class="btn btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro...?')">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

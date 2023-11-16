@@ -43,7 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -88,8 +96,67 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assetslogin\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assetslogin\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assetslogin\fonts\fa-brands-400.svg" />
+    <Content Include="assetslogin\fonts\fa-regular-400.svg" />
+    <Content Include="assetslogin\fonts\fa-solid-900.svg" />
+    <Content Include="assetslogin\fonts\fontawesome-all.min.css" />
+    <Content Include="assetslogin\js\bs-init.js" />
+    <Content Include="assetslogin\js\chart.min.js" />
+    <Content Include="assetslogin\js\ini.js" />
+    <Content Include="assetslogin\js\jquery.form.js" />
+    <Content Include="assetslogin\js\jquery.validate.min.js" />
+    <Content Include="assetslogin\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="assetslogin\js\theme.js" />
+    <Content Include="assets\css\crossword-puzzle.css" />
     <Content Include="assets\css\sopa-de-letras.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap4.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap4.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap5.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bootstrap5.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bulma.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.bulma.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.dataTables.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.dataTables.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.foundation.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.foundation.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.jqueryui.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.jqueryui.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.semanticui.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\dataTables.semanticui.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\jquery.dataTables.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\css\jquery.dataTables.min.css" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\images\sort_asc.png" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\images\sort_asc_disabled.png" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\images\sort_both.png" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\images\sort_desc.png" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\images\sort_desc_disabled.png" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap4.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap4.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap5.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bootstrap5.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bulma.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.bulma.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.dataTables.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.dataTables.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.foundation.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.foundation.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.jqueryui.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.jqueryui.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.semanticui.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\dataTables.semanticui.min.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\jquery.dataTables.js" />
+    <Content Include="assets\DataTables\DataTables-1.13.7\js\jquery.dataTables.min.js" />
+    <Content Include="assets\DataTables\datatables.css" />
+    <Content Include="assets\DataTables\datatables.js" />
+    <Content Include="assets\DataTables\datatables.min.css" />
+    <Content Include="assets\DataTables\datatables.min.js" />
     <Content Include="assets\images\blog-1.jpg" />
     <Content Include="assets\images\blog-2.jpg" />
     <Content Include="assets\images\blog-3.jpg" />
@@ -127,27 +194,92 @@
     <Content Include="assets\images\shop-img-4.jpg" />
     <Content Include="assets\images\title-underline.png" />
     <Content Include="assets\img\SopaLetra.png" />
+    <Content Include="assets\intranet\assets\icons\mCSB_buttons.png" />
+    <Content Include="assets\intranet\assets\img\avatar.jpg" />
+    <Content Include="assets\intranet\assets\img\loginFont.jpg" />
+    <Content Include="assets\intranet\assets\img\sideBar-font.jpg" />
+    <Content Include="assets\intranet\css\bootstrap-material-design.min.css" />
+    <Content Include="assets\intranet\css\bootstrap.min.css" />
+    <Content Include="assets\intranet\css\jquery.mCustomScrollbar.css" />
+    <Content Include="assets\intranet\css\main.css" />
+    <Content Include="assets\intranet\css\material-design-iconic-font.min.css" />
+    <Content Include="assets\intranet\css\ripples.min.css" />
+    <Content Include="assets\intranet\css\sweetalert2.css" />
+    <Content Include="assets\intranet\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\intranet\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="assets\intranet\fonts\robotocondensed-light.svg" />
+    <Content Include="assets\intranet\fonts\robotocondensed-regular.svg" />
+    <Content Include="assets\intranet\js\bootstrap.min.js" />
+    <Content Include="assets\intranet\js\jquery-3.1.1.min.js" />
+    <Content Include="assets\intranet\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="assets\intranet\js\main.js" />
+    <Content Include="assets\intranet\js\material.min.js" />
+    <Content Include="assets\intranet\js\ripples.min.js" />
+    <Content Include="assets\intranet\js\sweetalert2.min.js" />
+    <Content Include="assets\js\crossword-puzzle.js" />
     <Content Include="assets\js\script.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="assets\images\DALL·E 2023-10-11 21.38.32 - crea un animal gamer algo mas  ciberpunk.png" />
     <Content Include="readme-images\desktop.png" />
+    <Content Include="Uploads\LogoZooHuachipa.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GameCrossWorldController.cs" />
     <Compile Include="Controllers\GameCrucigramaController.cs" />
     <Compile Include="Controllers\GameSopaLetrasController.cs" />
     <Compile Include="Controllers\GameVozController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\categoria.cs" />
     <Compile Include="Models\ClsCrucigrama.cs" />
+    <Compile Include="Models\HashHelper.cs" />
+    <Compile Include="Models\juego.cs" />
+    <Compile Include="Models\medalla.cs" />
+    <Compile Include="Models\ModeloSistema.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\score.cs" />
+    <Compile Include="Models\SessionHelper.cs" />
+    <Compile Include="Models\usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="assets\intranet\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\intranet\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\intranet\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\intranet\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\intranet\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="assets\intranet\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="assets\intranet\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="assets\intranet\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="assets\intranet\fonts\robotocondensed-light.eot" />
+    <Content Include="assets\intranet\fonts\robotocondensed-light.ttf" />
+    <Content Include="assets\intranet\fonts\robotocondensed-light.woff" />
+    <Content Include="assets\intranet\fonts\robotocondensed-light.woff2" />
+    <Content Include="assets\intranet\fonts\robotocondensed-regular.eot" />
+    <Content Include="assets\intranet\fonts\robotocondensed-regular.ttf" />
+    <Content Include="assets\intranet\fonts\robotocondensed-regular.woff" />
+    <Content Include="assets\intranet\fonts\robotocondensed-regular.woff2" />
+    <Content Include="assetslogin\fonts\fa-brands-400.eot" />
+    <Content Include="assetslogin\fonts\fa-brands-400.ttf" />
+    <Content Include="assetslogin\fonts\fa-brands-400.woff" />
+    <Content Include="assetslogin\fonts\fa-brands-400.woff2" />
+    <Content Include="assetslogin\fonts\fa-regular-400.eot" />
+    <Content Include="assetslogin\fonts\fa-regular-400.ttf" />
+    <Content Include="assetslogin\fonts\fa-regular-400.woff" />
+    <Content Include="assetslogin\fonts\fa-regular-400.woff2" />
+    <Content Include="assetslogin\fonts\fa-solid-900.eot" />
+    <Content Include="assetslogin\fonts\fa-solid-900.ttf" />
+    <Content Include="assetslogin\fonts\fa-solid-900.woff" />
+    <Content Include="assetslogin\fonts\fa-solid-900.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -155,6 +287,14 @@
     <Content Include="Views\GameVoz\JuegoVoz.cshtml" />
     <Content Include="Views\GameSopaLetras\Index.cshtml" />
     <Content Include="Views\GameCrucigrama\Index.cshtml" />
+    <Content Include="Views\GameCrossWorld\Index.cshtml" />
+    <Content Include="Views\Shared2\_Layout.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Perfil\Index.cshtml" />
+    <Content Include="Views\Usuario\Ver.cshtml" />
+    <Content Include="Views\Usuario\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
