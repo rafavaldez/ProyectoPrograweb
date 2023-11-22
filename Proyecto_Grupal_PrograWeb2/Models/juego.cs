@@ -23,7 +23,7 @@ namespace Proyecto_Grupal_PrograWeb2.Models
         [StringLength(45)]
         public string descripcion { get; set; }
 
-        public int categoria_id { get; set; }
+        public int? categoria_id { get; set; }
 
         public virtual categoria categoria { get; set; }
 

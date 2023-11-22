@@ -6,10 +6,9 @@ namespace Proyecto_Grupal_PrograWeb2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
     using System.Data.Entity.Spatial;
-    using System.Linq;
-
     using System.Data.Entity.Validation;
     using System.IO;
+    using System.Linq;
     using System.Web;
 
     [Table("usuario")]
@@ -181,7 +180,7 @@ namespace Proyecto_Grupal_PrograWeb2.Models
 
                         if (filtro.Contains(extension) && (Foto.ContentLength <= size))
                         {
-                            
+
                             //string archivo = Path.GetFileName(Foto.FileName);
                             //Foto.SaveAs(HttpContext.Current.Server.MapPath("~/Uploads/" + archivo));
                             //this.AVATAR = archivo;
@@ -237,5 +236,6 @@ namespace Proyecto_Grupal_PrograWeb2.Models
 
             return rm;
         }
+
     }
 }

@@ -37,6 +37,11 @@
                 @Html.ValidationMessageFor(x => x.apellido, null, new { @class = "text-danger" })
             </div>
             <div class="form-control">
+                @Html.Label("Correo: ")
+                @Html.TextBoxFor(x => x.email, new { @class = "forn-control" })
+                @Html.ValidationMessageFor(x => x.email, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-control">
                 @Html.Label("Clave: ")
                 @Html.TextBoxFor(x => x.password, new { @class = "forn-control" })
                 @Html.ValidationMessageFor(x => x.password, null, new { @class = "text-danger" })

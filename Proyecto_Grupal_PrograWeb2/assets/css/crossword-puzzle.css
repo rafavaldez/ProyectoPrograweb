@@ -1,6 +1,7 @@
 .puzzle {
 	border-collapse: collapse;
 	border-color:#000000;
+	align-content: center;
 }
 
 .letter-cell {
@@ -16,6 +17,7 @@
 
 .list-text {
 	font-family:helvetica;
+	border:solid;
 }
 
 .blank-cell {
@@ -29,6 +31,7 @@
 .linkable {
 	cursor:pointer;
 	color:blue;
+	background-color:darkcyan;
 	text-decoration:underline;
 }
 .background-text {

@@ -139,7 +139,7 @@ function showCrossWordOptions() {
 			$('#reveal-answer-button').attr('disabled', true);
 			
 			$('#answer-results').show();
-			$('#answer-results').html('You have already solved this problem.');
+			$('#answer-results').html('No puedes volver a realizar el acertijo.');
 			
 			$('#solution-answer').val(word);
 		} else {
@@ -221,7 +221,7 @@ function showCrossWordOptions() {
 		} else {
 			if(!$('#answer-results').is(':visible')) {
 				$('#answer-results').show();
-				$('#answer-results').html('Incorrect Answer, Please Try Again');
+				$('#answer-results').html('Respuesta Incorrecta, Intente Otra vez');
 			}
 		}
 		

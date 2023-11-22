@@ -21,7 +21,7 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             var rm = objUsuario.ValidarLogin(Usuario, Password);
             if (rm.response)
             {
-                rm.href = Url.Content("/Home/Index2.cshtml");
+                rm.href = Url.Content("/Home/Index2");
             }
             return Json(rm);
         }

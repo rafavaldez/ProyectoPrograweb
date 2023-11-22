@@ -104,6 +104,7 @@
     <Content Include="assetslogin\fonts\fontawesome-all.min.css" />
     <Content Include="assetslogin\js\bs-init.js" />
     <Content Include="assetslogin\js\chart.min.js" />
+    <Content Include="assetslogin\js\jquery-3.7.1.min.js" />
     <Content Include="assetslogin\js\ini.js" />
     <Content Include="assetslogin\js\jquery.form.js" />
     <Content Include="assetslogin\js\jquery.validate.min.js" />
@@ -193,7 +194,12 @@
     <Content Include="assets\images\shop-img-3.jpg" />
     <Content Include="assets\images\shop-img-4.jpg" />
     <Content Include="assets\images\title-underline.png" />
+    <Content Include="assets\img\elefante.jpg" />
+    <Content Include="assets\img\Guanaco03.jpg" />
+    <Content Include="assets\img\leon.jpg" />
+    <Content Include="assets\img\puzzle.jpeg" />
     <Content Include="assets\img\SopaLetra.png" />
+    <Content Include="assets\img\tigre.jpg" />
     <Content Include="assets\intranet\assets\icons\mCSB_buttons.png" />
     <Content Include="assets\intranet\assets\img\avatar.jpg" />
     <Content Include="assets\intranet\assets\img\loginFont.jpg" />
@@ -234,15 +240,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PuzzleController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\admin.cs" />
     <Compile Include="Models\categoria.cs" />
     <Compile Include="Models\ClsCrucigrama.cs" />
     <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\juego.cs" />
-    <Compile Include="Models\medalla.cs" />
     <Compile Include="Models\ModeloSistema.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\score.cs" />
@@ -295,6 +302,8 @@
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Usuario\Ver.cshtml" />
     <Content Include="Views\Usuario\AgregarEditar.cshtml" />
+    <Content Include="Views\Puzzle\Puzzle1.cshtml" />
+    <Content Include="Views\Puzzle\Puzzle2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

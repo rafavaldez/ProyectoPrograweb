@@ -1,15 +1,15 @@
-﻿
+﻿@using Proyecto_Grupal_PrograWeb2.Models;
 @{
     Layout = null;
     //string controlador = ViewContext.RouteData.Values["controller"].ToString().ToLower();
 
-    Proyecto_Grupal_PrograWeb2.Models.usuario usuario = new Proyecto_Grupal_PrograWeb2.Models.usuario().Obtener(Proyecto_Grupal_PrograWeb2.Models.SessionHelper.GetUser());
+    usuario usuario = new usuario().Obtener(SessionHelper.GetUser());
 }
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Inicio</title>
+    <title>Inicio-Administracion</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link href="~/assets/intranet/css/main.css" rel="stylesheet" />
@@ -20,12 +20,12 @@
 </head>
 <body>
     <!-- SideBar -->
-    <section class="full-box cover dashboard-sideBar">
-        <div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
+    <section class="full-box cover dashboard-sideBar bg-success">
+        <div class="full-box dashboard-sideBar-bg btn-menu-dashboard "></div>
         <div class="full-box dashboard-sideBar-ct">
             <!--SideBar Title -->
             <div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-                company <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+                Zoologico Huachipa <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
             </div>
             <!-- SideBar User info -->
             <div class="full-box dashboard-sideBar-UserInfo">
@@ -49,7 +49,7 @@
             <!-- SideBar Menu -->
             <ul class="list-unstyled full-box dashboard-sideBar-Menu">
                 <li>
-                    <a href="~/Home/index2">
+                    <a href="~/Home/Index2">
                         <i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
                     </a>
                 </li>
@@ -62,19 +62,19 @@
                             <a href="period.html"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Period</a>
                         </li>*@
                         <li>
-                            <a href="/Usuario/Index"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Subject</a>
+                            <a href="/Usuario/Index"><i class="zmdi zmdi-book zmdi-hc-fw"></i>Usuarios</a>
                         </li>
                         <li>
-                            <a href="/Juego/Index"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Section</a>
+                            <a href="#"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Score</a>
                         </li>
                         @*<li>
                             <a href="salon.html"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a>
                         </li>*@
                     </ul>
                 </li>
-                <li>
+                @*<li>
                     <a href="#!" class="btn-sideBar-SubMenu">
-                        <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Users <i class="zmdi zmdi-caret-down pull-right"></i>
+                        <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
                     </a>
                     <ul class="list-unstyled full-box">
                         <li>
@@ -90,7 +90,7 @@
                             <a href="representative.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a>
                         </li>
                     </ul>
-                </li>
+                </li>*@
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi-card zmdi-hc-fw"></i> Payments <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -147,7 +147,7 @@
         <!-- Content page -->
         <div class="container-fluid">
             <div class="page-header">
-                <h1 class="text-titles">Programa Web <small>EduZoo Huachipa</small></h1>
+                <h1 class="text-titles">Programa Web <small> EduZoo Huachipa</small></h1>
             </div>
         </div>
         <div class="container-fluid">
