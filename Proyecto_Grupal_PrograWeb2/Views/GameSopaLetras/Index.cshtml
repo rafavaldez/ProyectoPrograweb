@@ -1,198 +1,55 @@
 ﻿
 @{
     Layout = null;
-    string[] palabras = ViewBag.Palabras as string[];
-    List<string[]> letrasSeparadas = ViewBag.LetrasSeparadas as List<string[]>;
-
-    Random random = new Random();
 }
 
-<!DOCTYPE html>
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/assets/css/sopa-de-letras.css" />
-    <title>Index</title>
+    <style>
+        body {
+            background-color: #333; /* Fondo oscuro */
+            color: #FFFF00; /* Texto amarillo oscuro */
+            text-align: center; /* Centrar el texto */
+        }
+
+        form {
+            display: inline-block; /* Alinear en el centro */
+            margin-top: 20px; /* Espacio superior */
+        }
+
+        button {
+            width: 150px; /* Ancho del botón */
+            height: 50px; /* Altura del botón */
+            margin: 10px; /* Espacio entre botones */
+            font-weight: bold; /* Texto en negrita */
+            color: #000; /* Texto negro */
+        }
+
+            button[value="Facil"] {
+                background-color: #00FF00; /* Fondo verde para el botón FACIL */
+            }
+
+            button[value="Normal"] {
+                background-color: #FFFF00; /* Fondo amarillo para el botón NORMAL */
+            }
+
+            button[value="Dificil"] {
+                background-color: #FF0000; /* Fondo rojo para el botón DIFICIL */
+            }
+
+        label {
+            color: #FFFF00; /* Texto amarillo oscuro para la etiqueta */
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Encabezado (nav) con el botón "Regresar" -->
-    <nav class="soup-nav">
-        <button href="@Url.Action("Index", "Home")"  class="regresar-button">Regresar</button>
-    </nav>
+    <h2 class="titulo">Selecciona un nivel de dificultad</h2>
 
-    <!-- Contenedor principal -->
-    <div class="soup-container">
-        <!-- Encabezado de la sopa de letras -->
-        <h1 class="soup-title">Sopa de Letras</h1>
-        <p class="soup-subtitle">Palabras a Buscar: @string.Join(", ", palabras)</p>
-        <div class="soup-content">
-            <!-- Agrega un contenedor para el contenido -->
-            <table class="soup-table">
-                @for (int row = 0; row < 10; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < 10; col++)
-                        {
-                            <td>
-                                @if (row < letrasSeparadas.Count && col < letrasSeparadas[row].Length)
-                                {
-                                    <button class="soup-cell" onclick="selectLetter(this)">@letrasSeparadas[row][col]</button>
-                                }
-                                else
-                                {
-                                    char letraAzar = (char)('A' + random.Next(26));
-                                    <button class="soup-cell" onclick="selectLetter(this)">@letraAzar</button>
-                                }
-                            </td>
-                        }
-                    </tr>
-                }
-            </table>
-            <button id="evaluar-button" class="evaluar-button" onclick="evaluarPalabras()"><b>Evaluar</b></button>
-        </div>
-    </div>
-
-    <!-- Pie de página (footer) -->
-    <footer class="soup-footer">
-        <!-- Contenido del footer -->
-    </footer>
-    <!-- Modal oculto -->
-    <div class="custom-modal" id="custom-modal">
-        <div class="modal-content">
-            <span class="close" id="close-button">&times;</span>
-            <p>¡Encontraste todas las palabras!</p>
-        </div>
-    </div>
-    <div class="custom-modal" id="intentos-modal">
-        <div class="modal-content">
-            <span class="close" id="intentos-close-button">&times;</span>
-            <p id="intentos-message">Te quedan X intentos.</p>
-        </div>
-    </div>
-    <div class="custom-modal" id="sin-intentos-modal">
-        <div class="modal-content">
-            <span class="close" id="sin-intentos-close-button">&times;</span>
-            <p id="sin-intentos-message">Ya no te quedan más intentos.</p>
-        </div>
-    </div>
+    <form method="post" action="@Url.Action("SeleccionarNivel", "GameSopaLetras")">
+        <label class="etiqueta">Selecciona un nivel de dificultad:</label>
+        <br />
+        <button type="submit" name="nivel" value="Facil" class="boton-facil">Fácil</button>
+        <button type="submit" name="nivel" value="Normal" class="boton-normal">Normal</button>
+        <button type="submit" name="nivel" value="Dificil" class="boton-dificil">Difícil</button>
+    </form>
 </body>
-</html>
-<script>
-    let intentosRestantes = 3; // Establece el número de intentos permitidos
-    let letrasSeleccionadas = [];
-
-    // Función para seleccionar/deseleccionar letras
-    function selectLetter(element) {
-        if (element.classList.contains('selected')) {
-            element.classList.remove('selected'); // Si ya está seleccionado, quitar la clase 'selected'
-            const index = letrasSeleccionadas.indexOf(element);
-            if (index > -1) {
-                letrasSeleccionadas.splice(index, 1); // Quitar la letra de la lista de letras seleccionadas
-            }
-        } else {
-            if (intentosRestantes > 0) {
-                element.classList.add('selected'); // Si no está seleccionado y quedan intentos, añadir la clase 'selected'
-                letrasSeleccionadas.push(element);
-            } else {
-                reiniciarTabla2();
-            }
-        }
-    }
-
-    function evaluarPalabras() {
-        const palabrasValidas = ["LEON", "MONO", "GATO", "PERRO", "ELEFANTE"];
-        const palabrasEncontradas = [];
-
-        letrasSeleccionadas.forEach(letra => {
-            palabrasValidas.forEach(palabra => {
-                if (palabra.includes(letra.innerText) && !palabrasEncontradas.includes(palabra)) {
-                    palabrasEncontradas.push(palabra);
-                }
-            });
-        });
-
-        if (palabrasEncontradas.length === palabrasValidas.length) {
-            /*alert('¡Encontraste todas las palabras!');*/
-            /*mostrarMensaje();*/
-            reiniciarTabla1();
-        } else {
-            intentosRestantes--;
-            if (intentosRestantes > 0) {
-                /*alert('Aún faltan palabras por encontrar. Te quedan ' + intentosRestantes + ' intentos.');*/
-                mostrarIntentosRestantes(intentosRestantes)
-            } else {
-                /*alert('No te quedan más intentos. La tabla se reiniciará.');*/
-                reiniciarTabla2();
-            }
-        }
-
-        letrasSeleccionadas.forEach(letra => {
-            letra.classList.remove('selected');
-        });
-        letrasSeleccionadas = [];
-    }
-
-    function reiniciarTabla1() {
-        // Lógica para reiniciar la tabla (puedes implementarla según tus necesidades)
-        mostrarMensaje();
-        setTimeout(function () {
-            location.reload();
-        }, 10000); // Espera 10 segundos (10000 milisegundos) antes de recargar la página
-    }
-
-    function reiniciarTabla2() {
-        /*alert('No te quedan más intentos. La tabla se reiniciará.');*/
-        mostrarSinIntentos()
-        setTimeout(function () {
-            location.reload();
-        }, 6000); // Espera 6 segundos (6000 milisegundos) antes de recargar la página
-    }
-
-    // Mostrar el cuadro de diálogo
-    function mostrarMensaje() {
-        var modal = document.getElementById("custom-modal");
-        modal.style.display = "block";
-    }
-
-    // Ocultar el cuadro de diálogo
-    function ocultarMensaje() {
-        var modal = document.getElementById("custom-modal");
-        modal.style.display = "none";
-    }
-
-    // Cerrar el cuadro de diálogo al hacer clic en la 'x'
-    var closeButton = document.getElementById("close-button");
-    closeButton.onclick = function () {
-        ocultarMensaje();
-    }
-
-    function mostrarIntentosRestantes(intentosRestantes) {
-        var intentosModal = document.getElementById("intentos-modal");
-        var intentosMessage = document.getElementById("intentos-message");
-        intentosMessage.textContent = "Te quedan " + intentosRestantes + " intentos.";
-        intentosModal.style.display = "block";
-    }
-
-    function mostrarSinIntentos() {
-        var sinIntentosModal = document.getElementById("sin-intentos-modal");
-        sinIntentosModal.style.display = "block";
-    }
-
-    function ocultarMensaje(modalId) {
-        var modal = document.getElementById(modalId);
-        modal.style.display = "none";
-    }
-
-    // Cerrar los mensajes al hacer clic en la 'x'
-    var intentosCloseButton = document.getElementById("intentos-close-button");
-    intentosCloseButton.onclick = function () {
-        ocultarMensaje("intentos-modal");
-    }
-
-    var sinIntentosCloseButton = document.getElementById("sin-intentos-close-button");
-    sinIntentosCloseButton.onclick = function () {
-        ocultarMensaje("sin-intentos-modal");
-    }
-
-</script>
-

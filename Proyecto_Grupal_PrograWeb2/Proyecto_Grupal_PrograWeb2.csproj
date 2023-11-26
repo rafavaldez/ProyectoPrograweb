@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="assetslogin\bootstrap\css\bootstrap.min.css" />
     <Content Include="assetslogin\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assetslogin\css\Login.css" />
     <Content Include="assetslogin\fonts\fa-brands-400.svg" />
     <Content Include="assetslogin\fonts\fa-regular-400.svg" />
     <Content Include="assetslogin\fonts\fa-solid-900.svg" />
@@ -292,7 +293,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\GameVoz\JuegoVoz.cshtml" />
-    <Content Include="Views\GameSopaLetras\Index.cshtml" />
     <Content Include="Views\GameCrucigrama\Index.cshtml" />
     <Content Include="Views\GameCrossWorld\Index.cshtml" />
     <Content Include="Views\Shared2\_Layout.cshtml" />
@@ -304,6 +304,11 @@
     <Content Include="Views\Usuario\AgregarEditar.cshtml" />
     <Content Include="Views\Puzzle\Puzzle1.cshtml" />
     <Content Include="Views\Puzzle\Puzzle2.cshtml" />
+    <Content Include="Views\Login\Index2.cshtml" />
+    <Content Include="Views\GameSopaLetras\Index.cshtml" />
+    <Content Include="Views\GameSopaLetras\NivelFacil.cshtml" />
+    <Content Include="Views\GameSopaLetras\NivelNormal.cshtml" />
+    <Content Include="Views\GameSopaLetras\NivelDificil.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

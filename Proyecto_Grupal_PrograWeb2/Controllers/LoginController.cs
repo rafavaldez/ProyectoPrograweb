@@ -16,9 +16,14 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             return View();
         }
 
-        public JsonResult Validar(string Usuario, string Password)
+        public ActionResult Index2()
         {
-            var rm = objUsuario.ValidarLogin(Usuario, Password);
+            return View();
+        }
+
+        public JsonResult Validar(string Email, string Password)
+        {
+            var rm = objUsuario.ValidarLogin(Email, Password);
             if (rm.response)
             {
                 rm.href = Url.Content("/Home/Index2");
