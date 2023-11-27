@@ -5,6 +5,8 @@ namespace Proyecto_Grupal_PrograWeb2.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
+    using System.Linq;
 
     [Table("score")]
     public partial class score
@@ -22,5 +24,15 @@ namespace Proyecto_Grupal_PrograWeb2.Models
         public virtual juego juego { get; set; }
 
         public virtual usuario usuario { get; set; }
+
+
+        
+
+
+
+
+
     }
+
+
 }

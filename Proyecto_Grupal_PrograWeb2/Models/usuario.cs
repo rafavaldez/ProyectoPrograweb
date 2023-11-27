@@ -124,7 +124,7 @@ namespace Proyecto_Grupal_PrograWeb2.Models
             }
         }
 
-        //Validar Login
+
         public ResponseModel ValidarLogin(string usuario, string password)
         {
             var rm = new ResponseModel();
@@ -135,12 +135,14 @@ namespace Proyecto_Grupal_PrograWeb2.Models
                     //password = HashHelper.MD5(password);
 
                     var user = db.usuario.Where(x => x.email == usuario)
-                               .Where(x => x.password == password)
-                               .SingleOrDefault();
+                                        .Where(x => x.password == password)
+                                        .SingleOrDefault();
 
                     if (user != null)
                     {
+                        // Guarda el ID del usuario en la sesión
                         SessionHelper.AddUserToSession(user.id.ToString());
+
                         rm.SetResponse(true);
                     }
                     else
@@ -156,6 +158,73 @@ namespace Proyecto_Grupal_PrograWeb2.Models
 
             return rm;
         }
+
+        
+
+
+        public void GuardarPuntajeEnBD(double puntos, int nivel, int juegoid)
+        {
+            try
+            {
+                using (var db = new ModeloSistema())
+                {
+                    // Obtiene el ID del usuario desde la sesión
+                    var userId = Convert.ToInt32(SessionHelper.GetUser());
+
+                    Console.WriteLine($"userId: {userId}, juegoid: {juegoid}, puntos: {puntos}, nivel: {nivel}");
+
+                    if (userId != 0)
+                    {
+                        // Crea un nuevo objeto Score con los datos necesarios
+                        var nuevoScore = new score
+                        {
+                            usuario_id = userId,
+                            juego_id = juegoid, // Reemplaza con el identificador del juego
+                            puntos = puntos,
+                            nivel = nivel,
+                        };
+
+                        // Agrega el nuevo puntaje a la base de datos
+                        db.score.Add(nuevoScore);
+
+                        // Registra las consultas SQL
+                        db.Database.Log = Console.Write;
+
+                        // Guarda los cambios en la base de datos
+                        db.SaveChanges();
+
+                        Console.WriteLine("Puntaje guardado exitosamente.");
+                    }
+                    else
+                    {
+                        // Maneja el caso en que el usuario no esté autenticado
+                        // (puede redirigir a la página de inicio de sesión, mostrar un mensaje de error, etc.)
+                        Console.WriteLine("El usuario no está autenticado.");
+                        throw new InvalidOperationException("El usuario no está autenticado.");
+                    }
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Maneja las excepciones de validación de entidades
+                foreach (var validationError in ex.EntityValidationErrors.SelectMany(validationErrors => validationErrors.ValidationErrors))
+                {
+                    Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                }
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Maneja otras excepciones
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Inner Exception: {ex.InnerException?.Message}");
+                throw;
+            }
+        }
+
+
+
 
         //Metodo Perfil
         public ResponseModel GuardarPerfil(HttpPostedFileBase Foto, string clave)

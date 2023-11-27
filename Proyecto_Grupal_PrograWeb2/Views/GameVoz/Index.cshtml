@@ -1,0 +1,186 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P|Orbitron:400,700">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    h2 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 32px;
+        margin: 20px 0;
+    }
+
+    p {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 18px;
+    }
+
+    audio {
+        width: 100%;
+        max-width: 400px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .opciones {
+        background-color: #1a1a1a;
+        color: #ff6600;
+        padding: 15px;
+        margin: 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        text-align: center;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 20px;
+        transition: background-color 0.3s;
+    }
+
+        .opciones:hover {
+            background-color: #ff6600;
+            color: #1a1a1a;
+        }
+
+        .opciones:focus {
+            outline: none;
+        }
+
+    .game-frame {
+        border: 4px solid #ff6600 !important;
+        border-radius: 10px !important;
+        padding: 20px !important;
+        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .header-section {
+        background-color: #ff6600 !important;
+        border-top-left-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        padding: 10px !important;
+        width: 100% !important;
+    }
+
+    .body-section {
+        padding: 20px !important;
+        width: 100% !important;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .button-style {
+        background-color: #000; /* Fondo negro */
+        color: #ff6600;
+        padding: 5px 20px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 18px;
+        font-weight: bold; /* Texto en negrita */
+        border: 2px solid #ff6600;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 0 10px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .button-style:hover {
+            background-color: #ff6600;
+            color: #000; /* Texto en negro al pasar el ratón */
+        }
+</style>
+
+<main>
+    <article>
+        <section class="section hero" id="home" aria-label="home" style="background-image: url('~/assets/images/hero-bg.jpg')">
+            <div class="container game-frame">
+                <!-- Encabezado (Header) -->
+                <div class="header-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="text-align: left; flex: 1;">
+                            <!-- Elemento en la esquina izquierda: Puntuación -->
+                            <p style="font-family: 'Orbitron', sans-serif; font-size: 18px; margin: 0;">Score: <span id="puntuacion">@ViewBag.Puntuacion</span> pts</p>
+                        </div>
+                        <div style="text-align: center; flex: 1;" class="button-container">
+                            <!-- Elemento en el medio: Fechas para cambiar de nivel -->
+                            <button class="button-style" id="nivelAnterior">&lt;</button>
+                            <button class="button-style" id="nivelSiguiente">&gt;</button>
+                        </div>
+                        <div style="text-align: right; flex: 1;">
+                            <!-- Elemento debajo del elemento en medio: Nivel -->
+                            <p style="font-family: 'Orbitron', sans-serif; font-size: 18px; margin: 0;">NIVEL <span id="nivel">@ViewBag.Nivel</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cuerpo del juego (Body) -->
+                <div class="body-section">
+                    <h1>Juego de Adivinar la Música</h1>
+                    <div class="audio-container">
+                        <p>Escucha la siguiente canción y adivina su nombre:</p>
+                        <audio controls autoplay>
+                            <source src="@ViewBag.EnlaceCancionSeleccionada" type="audio/mpeg">
+                            Tu navegador no soporta la reproducción de audio.
+                        </audio>
+                        <p>Opciones:</p>
+                        @foreach (var nombre in ViewBag.Nombres)
+                        {
+                            <div class="opciones" data-nombre="@nombre">
+                                <p>@nombre</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+
+<script>
+    $(document).ready(function () {
+        // Manejar el evento de clic para opciones
+        $('.opciones').on('click', function () {
+            var nombreClickeado = $(this).data('nombre');
+            // Enviar el nombre seleccionado al controlador mediante AJAX
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ComprobarCancion", "GameVoz")',
+                data: { nombre: nombreClickeado },
+                success: function (resultado) {
+                    if (resultado.esCorrecto) {
+                        $('#puntuacion').text(parseInt($('#puntuacion').text()) + 20 );
+                        Swal.fire('¡Correcto!', 'Has adivinado la canción.', 'success').then(function () {
+                            // Recargar la página para pasar al siguiente nivel y obtener nuevas canciones
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Incorrecto', 'Sigue intentando.', 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Error', 'Hubo un error al procesar tu solicitud.', 'error');
+                }
+            });
+        });
+
+        // Manejar el evento de clic para el nivel anterior
+        $('#nivelAnterior').on('click', function () {
+            var nivelActual = parseInt($('#nivel').text());
+            if (nivelActual > 1) {
+                $('#nivel').text(nivelActual - 1);
+                location.reload();
+            }
+        });
+
+        // Manejar el evento de clic para el nivel siguiente
+        $('#nivelSiguiente').on('click', function () {
+            var nivelActual = parseInt($('#nivel').text());
+            $('#nivel').text(nivelActual + 1);
+            location.reload();
+        });
+    });
+</script>

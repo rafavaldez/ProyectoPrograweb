@@ -1,0 +1,303 @@
+﻿@{
+    ViewBag.Title = "Facil";
+
+}
+
+<h2>Facil</h2>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/trontastic/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+<link href="~/assets/css/estilo.css" rel="stylesheet" />
+
+
+<style>
+    h2 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 32px;
+        margin: 20px 0;
+    }
+
+    p {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 18px;
+    }
+
+
+
+    .game-frame {
+        border: 4px solid #ff6600 !important;
+        border-radius: 10px !important;
+        padding: 20px !important;
+        height: 110vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .header-section {
+        background-color: #ff6600 !important;
+        border-top-left-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        padding: 10px !important;
+        width: 100% !important;
+    }
+
+    .body-section {
+        padding: 20px !important;
+        width: 100% !important;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    #pregunta {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
+        z-index: 1;
+        position: absolute;
+        top: 17%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #imgBandera {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        border: 4px solid #ff6600;
+        border-radius: 10px;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .btn::after {
+        content: none;
+        position: static;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        width: auto;
+        transform: none;
+        background-color: transparent;
+        transition: none;
+    }
+</style>
+
+
+
+
+<main>
+    <article>
+        <section class="section hero" id="home" aria-label="home" style="background-image: url('~/assets/images/hero-bg.jpg')">
+            <div class="container game-frame">
+
+                <h1>ADIVINA LA BANDERA</h1>
+
+                <!-- Pantalla inicial -->
+                <div id="pantalla-inicial">
+
+                    <button class="btn" onclick="comenzarJuego()">COMENZAR A JUGAR</button>
+                </div>
+
+                <!-- Pantalla juego -->
+                <div class="pantalla-juego" id="pantalla-juego">
+                    <p id="pregunta"></p>
+
+                    <img src="https://concepto.de/wp-content/uploads/2019/05/leon-sabana-africa-e1559242836802.jpg" alt="" id="imgBandera">
+                    <div class="opciones">
+                        <div class="opcion" id="op0" onclick="comprobarRespuesta(0)">
+                            <div class="letra" id="l0">A</div>
+                            <div class="nombre" id="n0">OPCION A</div>
+                        </div>
+                        <div class="opcion" id="op1" onclick="comprobarRespuesta(1)">
+                            <div class="letra" id="l1">B</div>
+                            <div class="nombre" id="n1">OPCION B</div>
+                        </div>
+                        <div class="opcion" id="op2" onclick="comprobarRespuesta(2)">
+                            <div class="letra" id="l2">C</div>
+                            <div class="nombre" id="n2">OPCION C</div>
+                        </div>
+                        <div class="opcion" id="op3" onclick="comprobarRespuesta(3)">
+                            <div class="letra" id="l3">D</div>
+                            <div class="nombre" id="n3">OPCION D</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pantalla final -->
+                <div id="pantalla-final">
+                    <h2>CORRECTAS: <span id="numCorrectas">3</span></h2>
+                    <h2>INCORRECTAS: <span id="numIncorrectas">2</span></h2>
+                    <button class="btn" onclick="volverAlInicio()">VOLVER AL INICIO</button>
+                </div>
+
+            </div>
+        </section>
+    </article>
+</main>
+
+
+
+
+
+<script>
+    var jsonString = '@Html.Raw(ViewBag.JsonData)';
+    var jsonData = JSON.parse(jsonString);
+
+    // Obtener las URLs de las imágenes desde jsonData y llenar el array banderas
+    let banderas = jsonData.map(item => item.image_url);
+
+    let preguntas = jsonData.map(item => item.question);
+
+    console.log(banderas);
+
+    //arreglo que guardara la opcion correcta
+
+
+    //arreglo que guardara los paises a mostrar en cada jugada
+    // Función para mezclar un array de forma aleatoria
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    var jsonString = '@Html.Raw(ViewBag.JsonData)';
+    var jsonData = JSON.parse(jsonString);
+
+    let opciones = [];
+    let correcta = []; // Array para recordar las posiciones de las respuestas correctas
+
+    // Recorrer jsonData y llenar el array opciones con las opciones de cada pregunta
+    jsonData.forEach(item => {
+        let opcionesPregunta = [item.correct_answer, ...item.incorrect_answers];
+        opcionesPregunta = shuffleArray(opcionesPregunta); // Mezclar las opciones
+        opciones.push(opcionesPregunta);
+
+        // Encontrar la posición de la respuesta correcta después de mezclar
+        let posicionCorrecta = opcionesPregunta.indexOf(item.correct_answer);
+        correcta.push(posicionCorrecta);
+    });
+
+    console.log(opciones);
+    console.log(correcta);
+
+
+
+
+
+
+    //variable que guarda la posicion actual
+    let posActual = 0;
+    //variable que guarda la cantidad acertadas hasta el moemento
+    let cantidadAcertadas = 0;
+
+    function comenzarJuego() {
+        //reseteamos las variables
+        posActual = 0;
+        cantidadAcertadas = 0;
+        //activamos las pantallas necesarias
+        document.getElementById("pantalla-inicial").style.display = "none";
+        document.getElementById("pantalla-juego").style.display = "block";
+        cargarBandera();
+
+    }
+
+    //funcion que carga la siguiente bandera y sus opciones
+    function cargarBandera() {
+        //controlo sis se acabaron las banderas
+        if (banderas.length <= posActual) {
+            terminarJuego();
+        }
+        else {//cargo las opciones
+            //limpiamos las clases que se asignaron
+            limpiarOpciones();
+
+            document.getElementById("pregunta").innerHTML = preguntas[posActual];
+            document.getElementById("imgBandera").src =  banderas[posActual];
+            document.getElementById("n0").innerHTML = opciones[posActual][0];
+            document.getElementById("n1").innerHTML = opciones[posActual][1];
+            document.getElementById("n2").innerHTML = opciones[posActual][2];
+            document.getElementById("n3").innerHTML = opciones[posActual][3];
+        }
+    }
+
+    function limpiarOpciones() {
+        document.getElementById("n0").className = "nombre";
+        document.getElementById("n1").className = "nombre";
+        document.getElementById("n2").className = "nombre";
+        document.getElementById("n3").className = "nombre";
+
+        document.getElementById("l0").className = "letra";
+        document.getElementById("l1").className = "letra";
+        document.getElementById("l2").className = "letra";
+        document.getElementById("l3").className = "letra";
+    }
+
+    function comprobarRespuesta(opElegida) {
+        if (opElegida == correcta[posActual]) {//acertó
+            //agregamos las clases para colocar el color verde a la opcion elegida
+            document.getElementById("n" + opElegida).className = "nombre nombreAcertada";
+            document.getElementById("l" + opElegida).className = "letra letraAcertada";
+            cantidadAcertadas++;
+        } else {//no acerto
+            //agramos las clases para colocar en rojo la opcion elegida
+            document.getElementById("n" + opElegida).className = "nombre nombreNoAcertada";
+            document.getElementById("l" + opElegida).className = "letra letraNoAcertada";
+
+            //opcion que era correcta
+            document.getElementById("n" + correcta[posActual]).className = "nombre nombreAcertada";
+            document.getElementById("l" + correcta[posActual]).className = "letra letraAcertada";
+        }
+        posActual++;
+        //Esperamos 1 segundo y pasamos mostrar la siguiente bandera y sus opciones
+        setTimeout(cargarBandera, 1000);
+    }
+    function terminarJuego() {
+        //ocultamos las pantallas y mostramos la pantalla final
+        document.getElementById("pantalla-juego").style.display = "none";
+        document.getElementById("pantalla-final").style.display = "block";
+        //agreamos los resultados
+        document.getElementById("numCorrectas").innerHTML = cantidadAcertadas;
+
+        var nivel = 1; // Supongamos que es el nivel 1
+        var puntos = 10 * cantidadAcertadas; // Puntos fijos
+        var juegoid = 2;
+        guardarPuntajeEnBD(nivel, puntos, juegoid);
+
+        document.getElementById("numIncorrectas").innerHTML = banderas.length - cantidadAcertadas;
+    }
+
+    function volverAlInicio() {
+        //ocultamos las pantallas y activamos la inicial
+        document.getElementById("pantalla-final").style.display = "none";
+        document.getElementById("pantalla-inicial").style.display = "block";
+        document.getElementById("pantalla-juego").style.display = "none";
+    }
+
+    function guardarPuntajeEnBD(nivel, puntos, juegoid) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GuardarPuntaje", "Preguntas")',
+                data: { nivel: nivel, puntos: puntos, juegoid: juegoid },
+                success: function (result) {
+                    console.log("Puntaje guardado exitosamente.");
+                },
+                error: function (error) {
+                    console.error("Error al guardar el puntaje: " + error.responseText);
+                }
+            });
+        }
+</script>

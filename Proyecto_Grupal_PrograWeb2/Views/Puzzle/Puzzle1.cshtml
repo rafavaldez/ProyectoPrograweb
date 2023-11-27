@@ -1,84 +1,97 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Puzzle1";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Puzzle</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/trontastic/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <link href="~/assets/css/sopa-de-letras.css" rel="stylesheet" />
-    <style>
-        #container {
-            width: 850px;
-            border: 2px solid black;
-            border-radius: 20px;
-            margin: 40px auto;
-            padding: 10px;
-        }
 
-        #pieceContainer {
-            width: 408px;
-            height: 408px;
+<meta name="viewport" content="width=device-width" />
+<title>Puzzle</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/trontastic/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<link href="~/assets/css/sopa-de-letras.css" rel="stylesheet" />
+<style>
+    #container {
+        width: 850px;
+        border: 2px solid black;
+        border-radius: 20px;
+        margin: 40px auto;
+        padding: 10px;
+        overflow: hidden; /* Para evitar que los elementos floten fuera del contenedor */
+    }
+
+    #pieceContainer {
+        width: 408px;
+        height: 408px;
+        border: 1px solid black;
+        float: left;
+        text-align: center;
+        font-size: 30px;
+        line-height: 400px;
+        position: relative;
+    }
+
+    #puzzleContainer {
+        width: 408px;
+        height: 408px;
+        border: 1px solid black;
+        float: left; /* Cambiado de "float: right" a "float: left" */
+        margin-left: 10px; /* Espacio entre los contenedores */
+    }
+
+    ul {
+        list-style-type: none;
+        text-align: center;
+        margin-top: 20px; /* Espacio entre los contenedores y los botones */
+    }
+
+        ul button {
+            width: 150px; /* Ancho ajustado para centrar */
             border: 1px solid black;
-            float: left;
-            text-align: center;
-            font-size: 30px;
-            line-height: 400px;
-            position: relative;
+            font-size: 20px;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 10px;
+            background-color: orange; /* Color naranja para los botones */
         }
 
-        #puzzleContainer {
-            width: 408px;
-            height: 408px;
-            border: 1px solid black;
-            float: right;
-        }
+    #btnReset {
+        display: none;
+    }
 
-        ul {
-            list-style-type: none;
-            text-align: center;
-        }
+    .piece {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        float: left;
+        background-image: url(../../assets/img/Guanaco03.jpg);
+        background-repeat: no-repeat;
+    }
+</style>
 
-            ul button {
-                width: 100px;
-                border: 1px solid black;
-                font-size: 20px;
-                border-radius: 5px;
-                padding: 5px;
-                margin-top: 10px;
-            }
 
-        #btnReset {
-            display: none;
-        }
 
-        .piece {
-            width: 100px;
-            height: 100px;
-            border: 1px solid black;
-            float: left;
-            background-image: url(../../assets/img/Guanaco03.jpg);
-            background-repeat: no-repeat;
-        }
-    </style>
-</head>
-<body class="soup-container">
-    <div id="container">
-        <div id="pieceContainer"></div>
-        <div id="puzzleContainer"></div>
-        <ul id="buttons">
-            <li><button id="btnStart">Empezar</button></li>
-            <li><button id="btnReset">Reiniciar</button></li>
-        </ul>
-    </div>
-</body>
-</html>
+
+
+
+<main>
+    <article>
+        <section class="section hero" id="home" aria-label="home" style="background-image: url('~/assets/images/hero-bg.jpg')">
+            <div id="container">
+                <div id="pieceContainer"></div>
+                <div id="puzzleContainer"></div>
+            </div>
+            <ul id="buttons">
+                <li><button id="btnStart">Empezar</button></li>
+                <li><button id="btnReset">Reiniciar</button></li>
+            </ul>
+        </section>
+    </article>
+</main>
+
+
+
 
 <script>
     $(document).ready(function () {
@@ -147,14 +160,36 @@
                 var order = item.data("order");
                 if (k == order) {
                     $("#pieceContainer").text("Ouch! Intenta Otra vez");
+                    
                     return false;
                 }
 
             }
             $("pieceContainer").text("WoW! Lograste completar el rompecabezas");
+            var nivel = 1; // Supongamos que es el nivel 1
+            var puntos = 30; // Puntos fijos
+            var juegoid = 1;
+            guardarPuntajeEnBD(nivel, puntos, juegoid);
+
+
             return true;
 
         }
+
+        function guardarPuntajeEnBD(nivel, puntos, juegoid) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GuardarPuntaje", "Puzzle")',
+                data: { nivel: nivel, puntos: puntos, juegoid: juegoid },
+                success: function (result) {
+                    console.log("Puntaje guardado exitosamente.");
+                },
+                error: function (error) {
+                    console.error("Error al guardar el puntaje: " + error.responseText);
+                }
+            });
+        }
+
 
         function implementLogic() {
             $(".draggablePiece").draggable({
@@ -189,3 +224,5 @@
         }
     });
 </script>
+
+
