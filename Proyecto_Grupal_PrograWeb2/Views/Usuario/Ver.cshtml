@@ -1,0 +1,27 @@
+﻿@model Proyecto_Grupal_PrograWeb2.Models.usuario
+
+@{
+    ViewBag.Title = "Ver";
+    Layout = "~/Views/Shared2/_Layout.cshtml";
+}
+
+<h2>Ver</h2>
+
+<div class="card border-success mb-3" style="max-width: 18rem;">
+    <div class="card-header">
+        Información del Usuario
+    </div>
+    <div class="card-body">
+        <dl class="collapse-horizontal">
+            <dt>Id Usuario</dt>
+            <dd>@Model.id</dd>
+            <dt>Apellidos y Nombres</dt>
+            <dd>@Model.apellido, @Model.nombre</dd>
+            <dt>Email</dt>
+            <dd>@Model.email</dd>
+            <dt>Estado</dt>
+            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+        </dl>
+    </div>
+</div>
+

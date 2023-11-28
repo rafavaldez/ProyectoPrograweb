@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<head>
+    <style>
+        body {
+            background-color: #333; /* Fondo oscuro */
+            color: #FFFF00; /* Texto amarillo oscuro */
+            text-align: center; /* Centrar el texto */
+        }
+
+        form {
+            display: inline-block; /* Alinear en el centro */
+            margin-top: 20px; /* Espacio superior */
+        }
+
+        button {
+            width: 150px; /* Ancho del botón */
+            height: 50px; /* Altura del botón */
+            margin: 10px; /* Espacio entre botones */
+            font-weight: bold; /* Texto en negrita */
+            color: #000; /* Texto negro */
+        }
+
+            button[value="Facil"] {
+                background-color: #00FF00; /* Fondo verde para el botón FACIL */
+            }
+
+            button[value="Normal"] {
+                background-color: #FFFF00; /* Fondo amarillo para el botón NORMAL */
+            }
+
+            button[value="Dificil"] {
+                background-color: #FF0000; /* Fondo rojo para el botón DIFICIL */
+            }
+
+        label {
+            color: #FFFF00; /* Texto amarillo oscuro para la etiqueta */
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="titulo">Selecciona un nivel de dificultad</h2>
+
+    <form method="post" action="@Url.Action("SeleccionarNivel", "GameSopaLetras")">
+        <label class="etiqueta">Selecciona un nivel de dificultad:</label>
+        <br />
+        <button type="submit" name="nivel" value="Facil" class="boton-facil">Fácil</button>
+        <button type="submit" name="nivel" value="Normal" class="boton-normal">Normal</button>
+        <button type="submit" name="nivel" value="Dificil" class="boton-dificil">Difícil</button>
+    </form>
+</body>

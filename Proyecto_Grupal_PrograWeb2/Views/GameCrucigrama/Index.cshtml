@@ -1,0 +1,86 @@
+﻿@model Proyecto_Grupal_PrograWeb2.Models.ClsCrucigrama
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        .cuadro {
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            margin: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .cuadro input {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                border: none;
+            }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-wrap: wrap;">
+        @for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 15; j++)
+            {
+                var isParteDePalabra = EsParteDePalabra(i, j);
+                var claseCss = isParteDePalabra ? "cuadro" : "cuadro-invisible";
+
+                <div class="@claseCss">
+                    @if (isParteDePalabra)
+                    {
+                        <input type="text" name="Tabla[@i, @j]" maxlength="1" />
+                    }
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>
+
+@functions {
+    bool EsParteDePalabra(int fila, int columna)
+    {
+        foreach (var palabra in Model.Palabras)
+        {
+            if (columna + palabra.Length <= 15)
+            {
+                // Verifica horizontalmente
+                string subPalabraHorizontal = new string(Enumerable.Range(0, palabra.Length).Select(k => ((char?)(Model.Tabla[fila, columna + k])).GetValueOrDefault('\0')).ToArray());
+
+
+                if (string.Equals(subPalabraHorizontal, palabra, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            if (fila + palabra.Length <= 15)
+            {
+                // Verifica verticalmente
+                string subPalabraVertical = new string(Enumerable.Range(0, palabra.Length).Select(k => ((char?)(Model.Tabla[fila + k, columna])).GetValueOrDefault('\0')).ToArray());
+
+                if (string.Equals(subPalabraVertical, palabra, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+

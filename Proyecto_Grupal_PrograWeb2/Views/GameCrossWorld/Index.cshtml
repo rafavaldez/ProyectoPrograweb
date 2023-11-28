@@ -1,0 +1,97 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Crucigrama</title>
+    <meta http-equiv="content-type" content="text/css/javascript/php; charset=UTF-8">
+
+    <script src="~/assetslogin/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+    <script src="~/assets/js/crossword-puzzle.js"></script>
+
+
+    <link href="~/assets/css/crossword-puzzle.css" rel="stylesheet" />
+
+</head>
+
+<script type="text/javascript">
+	$(document).ready(function (event) {
+		var puzzlewords = [
+			// word, clue
+			['Leon', 'Rey de la Sabana'],
+			['Rinoceronte', 'Piel Dura. Cuatro patas'],
+			['Jaguar', 'Un felino vive en america. Tiene una piel unica.'],
+			['Vicuña', 'La lana mas fina del mundo'],
+			['Aguia Harpia', 'Escudo'],
+			['Tigre', 'Piel rayado, depredador en la selva. Competidor del León'],
+			['Elefante', 'Grande de cuatro patas. Inteligente. Sentimental'],
+			['Llama', 'Animal comun en la sierra'],
+			['Halcon', 'Aterrizaje veloz'],
+			['Oso de Anteojos', 'You call your friends this, because Mr. and Mrs. are Sexist, gender-dominating terms.'],
+			['Hipopotamo', 'If something is based on the opposite of Domination, it is called this.'],
+			['Pinguino', 'Not just free to arrive when you want, but free to leave when you want, too.'],
+			['Tucan', 'To do something in a way that requires no force at all.'],
+			['Canguro', 'If top-down societies are vertical, then bottom-up societies are this.'],
+			['Nutria', 'Your health, your family, and your community should be this.'],
+		];
+		crosswordPuzzle(puzzlewords);
+	});
+</script>
+
+<body>
+    <h1 class="text-bg-success align-items-center">CRUCIGRAMA</h1>
+    <div id="root" class="root">
+    </div>
+
+    <div id="lists" class="lists">
+
+        <table class="table-borderless align-content-center">
+
+            <tr>
+                <td width="50%" id="left-list" valign="top" class="list-text">
+                    <center>
+                        <h3>Cruzado</h3>
+                    </center>
+                </td>
+                <td width="50%" id="right-list" valign="top" class="list-text">
+                    <center>
+                        <h3>Debajo</h3>
+                    </center>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div id="answer-form">
+
+        <div class="short-margin">
+
+            <p id="position-and-clue"></p>
+
+            <p>Respuesta : <input id="solution-answer" type="text" size="40"></p>
+
+            <p id="answer-results" class="hidden"></p>
+
+            <div class="align-content-center">
+                <input type="button" id="cancel-button" value="Cancelar"> 
+                <input type="button" id="answer-button" value="Respuesta"> 
+                <input type="button" id="reveal-answer-button" value="Revelar Respuesta">
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

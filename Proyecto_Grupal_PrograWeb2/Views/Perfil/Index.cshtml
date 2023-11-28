@@ -1,0 +1,46 @@
+﻿@model Proyecto_Grupal_PrograWeb2.Models.usuario
+
+@{
+    ViewBag.Title = "Perfil de Usuario";
+    Layout = "~/Views/Shared2/_Layout.cshtml";
+}
+
+<div class="card">
+    <h1 class="card-header">Mi perfil de Usuario</h1>
+
+    @using (Html.BeginForm("Actualizar", "Perfil", FormMethod.Post))
+    {
+        <div>
+            <div class="card-body">
+                <div class="form-control">
+                    
+                    @Html.HiddenFor(x => x.id)
+                    @Html.Label("Email: ")
+                    <br />
+                    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.email, null, new { @class = "text-danger" })
+
+                    @*<img src="~/Uploads/@Model.AVATAR" alt="@Model.AVATAR" width="100" height="115" />*@
+                </div>
+                <br />
+                <div class="form-control">
+                    
+                    @Html.HiddenFor(x => x.id)
+                    @Html.Label("Contraseña: ")
+                    @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.password, null, new { @class = "text-danger" })
+                </div>
+                @*<div class="form-control">
+                    <label>Imagen: </label>
+                    <input type="file" name="Foto" />
+                </div>*@
+            </div>
+            <div>
+                <button data-ajax="true" class="btn btn-primary">Guardar</button>
+                <a href="~/Home/index2" class="btn btn-danger">Cancelar</a>
+            </div>
+        </div>
+    }
+
+</div>
+
