@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proyecto_Grupal_PrograWeb2.Models;
 
 namespace Proyecto_Grupal_PrograWeb2.Controllers
 {
     public class GameSopaLetrasController : Controller
     {
+        usuario objUsuario = new usuario();
+
         // GET: GameSopaLetras
 
         public int n = 0;
@@ -254,6 +257,20 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             }
 
             return true;
+        }
+
+        //Cambiar dependinedo del Usuario que entre
+        public JsonResult ActualizarPuntaje(double puntaje)
+        {
+            try
+            {
+                objUsuario.GuardarPuntajeEnBD(puntaje, 1, 1);
+                return Json(new { success = true, message = "Puntaje actualizado correctamente" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Error al actualizar el puntaje: {ex.Message}" }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]

@@ -1,10 +1,4 @@
-﻿@using Proyecto_Grupal_PrograWeb2.Models;
-@{
-    Layout = null;
-    //string controlador = ViewContext.RouteData.Values["controller"].ToString().ToLower();
-
-    usuario usuario = new usuario().Obtener(SessionHelper.GetUser());
-}
+﻿
 
 <!DOCTYPE html>
 <html lang="es">
@@ -30,8 +24,9 @@
             <!-- SideBar User info -->
             <div class="full-box dashboard-sideBar-UserInfo">
                 <figure class="full-box">
-                    <img src="~/assets/intranet/assets/img/avatar.jpg" alt="UserIcon">
-                    <figcaption class="text-center text-titles">@usuario.nombre, @usuario.apellido</figcaption>
+                    <img src="~/Uploads/@admin.avatar" alt="UserIcon">
+                    <br />
+                    <figcaption class="text-center text-titles">@admin.user</figcaption>
                 </figure>
                 <ul class="full-box list-unstyled text-center">
                     <li>
@@ -59,38 +54,27 @@
                     </a>
                     <ul class="list-unstyled full-box">
                         @*<li>
-                            <a href="period.html"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Period</a>
-                        </li>*@
+            <a href="period.html"><i class="zmdi zmdi-timer zmdi-hc-fw"></i> Period</a>
+        </li>*@
                         <li>
                             <a href="/Usuario/Index"><i class="zmdi zmdi-book zmdi-hc-fw"></i>Usuarios</a>
+                        </li>
+                        <li>
+                            <a href="/Usuario/Index"><i class="zmdi zmdi-book zmdi-hc-fw"></i>Administradores</a>
                         </li>
                         <li>
                             <a href="#"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Score</a>
                         </li>
                         @*<li>
-                            <a href="salon.html"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a>
-                        </li>*@
+            <a href="salon.html"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a>
+        </li>*@
                     </ul>
                 </li>
-                @*<li>
+                <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
-                        <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
+                        <i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Administradores <i class="zmdi zmdi-caret-down pull-right"></i>
                     </a>
-                    <ul class="list-unstyled full-box">
-                        <li>
-                            <a href="admin.html"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Admin</a>
-                        </li>
-                        <li>
-                            <a href="teacher.html"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Teacher</a>
-                        </li>
-                        <li>
-                            <a href="student.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i> Student</a>
-                        </li>
-                        <li>
-                            <a href="representative.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a>
-                        </li>
-                    </ul>
-                </li>*@
+                </li>
                 <li>
                     <a href="#!" class="btn-sideBar-SubMenu">
                         <i class="zmdi zmdi-card zmdi-hc-fw"></i> Payments <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -133,15 +117,15 @@
                     </a>
                 </li>
                 @*<li>
-                    <a href="#!" class="btn-search">
-                        <i class="zmdi zmdi-search"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#!" class="btn-modal-help">
-                        <i class="zmdi zmdi-help-outline"></i>
-                    </a>
-                </li>*@
+                        <a href="#!" class="btn-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!" class="btn-modal-help">
+                            <i class="zmdi zmdi-help-outline"></i>
+                        </a>
+                    </li>*@
             </ul>
         </nav>
         <!-- Content page -->
@@ -151,7 +135,7 @@
             </div>
         </div>
         <div class="container-fluid">
-            @RenderBody()
+            
         </div>
     </section>
 
@@ -209,7 +193,7 @@
             </div>
 
         </div>
-    </section>  
+    </section>
     <!--====== Scripts -->
     <script src="~/assets/intranet/js/jquery-3.1.1.min.js"></script>
     <script src="~/assets/intranet/js/sweetalert2.min.js"></script>
@@ -218,6 +202,13 @@
     <script src="~/assets/intranet/js/ripples.min.js"></script>
     <script src="~/assets/intranet/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/assets/intranet/js/main.js"></script>
+    <!--ResnposbeModel-->
+    <script src="~/assetslogin/js/ini.js"></script>
+    <script src="~/assetslogin/js/jquery.form.js"></script>
+    <script src="~/assetslogin/js/jquery.validate.min.js"></script>
+    <script src="~/assetslogin/js/jquery.validate.unobtrusive.min.js"></script>
+
+
     <!--DataTables-->
     <script src="~/assets/DataTables/datatables.min.js"></script>
     <script>

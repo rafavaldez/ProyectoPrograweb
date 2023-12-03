@@ -1,4 +1,4 @@
-﻿@model Proyecto_Grupal_PrograWeb2.Models.usuario
+﻿@model Proyecto_Grupal_PrograWeb2.Models.admin
 
 @{
     ViewBag.Title = "Perfil de Usuario";
@@ -15,10 +15,10 @@
                 <div class="form-control">
                     
                     @Html.HiddenFor(x => x.id)
-                    @Html.Label("Email: ")
+                    @Html.Label("Usuario: ")
                     <br />
-                    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.email, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.user, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.user, null, new { @class = "text-danger" })
 
                     @*<img src="~/Uploads/@Model.AVATAR" alt="@Model.AVATAR" width="100" height="115" />*@
                 </div>
@@ -27,8 +27,14 @@
                     
                     @Html.HiddenFor(x => x.id)
                     @Html.Label("Contraseña: ")
-                    @Html.TextBoxFor(x => x.password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.password, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.contra, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.contra, null, new { @class = "text-danger" })
+                </div>
+                <div>
+                    <label>Imagen: </label>
+                    <input type="file" name="Foto" />
+                    <hr>
+                    <img src="~/Uploads/@Model." alt="@Model.avatar" width="100" height="100" />
                 </div>
                 @*<div class="form-control">
                     <label>Imagen: </label>

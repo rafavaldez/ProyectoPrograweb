@@ -3,186 +3,40 @@
     ViewBag.Title = "Index";
 }
 
-<main>
-    <article>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var jsonString = '@Html.Raw(ViewBag.JsonData)';
+        var jsonData = JSON.parse(jsonString);
 
-        <!--
-          - #HERO
-        -->
+        // Obtén la referencia al elemento ul en el DOM
+        var ulElement = document.querySelector('#content .content ul');
 
-        <section class="section hero" id="home" aria-label="home"
-                 style="background-image: url('~/assets/images/hero-bg.jpg')">
-            <div class="container">
+        // Itera sobre los primeros cuatro datos y agrega elementos li al ul
+        for (var i = 0; i < 4 && i < jsonData.length; i++) {
+            var animal = jsonData[i];
 
-                <div class="hero-content">
+            // Crea un nuevo elemento li
+            var liElement = document.createElement('li');
 
-                    <p class="hero-subtitle">World Gaming</p>
+            // Agrega el contenido al li
+            liElement.innerHTML = `
+                <a href="/Animales/About/${animal._id}"><img src="${animal.image_url}" width="114" height="160" alt=""></a>
+                <h2>${animal.name}</h2>
+                <p>${animal.description} <a class="more" href="/Animales/About/${animal._id}">View all</a></p>
+            `;
 
-                    <h1 class="h1 hero-title">
-                        Create <span class="span">Manage</span> Matches
-                    </h1>
-
-                    <p class="hero-text">
-                        Find technology or people for digital projects in public sector and Find an individual specialist develope
-                        researcher.
-                    </p>
-
-                    <button class="btn skewBg">Read More</button>
-
-                </div>
-
-                <figure class="hero-banner img-holder" style="--width: 700; --height: 700;">
-                    <img src="~/assets/images/imagenhomefox.png" width="900" height="700" alt="hero banner" >
-                </figure>
-
-            </div>
-        </section>
+            // Agrega el li al ul
+            ulElement.appendChild(liElement);
+        }
+    });
+</script>
 
 
-
-
-
-        <!--
-          - #BRAND
-        -->
-
-        <section class="section brand" aria-label="brand">
-            <div class="container">
-
-                <ul class="has-scrollbar">
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-1.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-2.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-3.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-4.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-5.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                    <li class="brand-item">
-                        <img src="~/assets/images/brand-6.png" width="90" height="90" loading="lazy" alt="brand logo">
-                    </li>
-
-                </ul>
-
-            </div>
-        </section>
-
-
-
-
-
-        <div class="section-wrapper">
-
-            <!--
-              - #LATEST GAME
-            -->
-
-            <section class="section latest-game" aria-label="latest game">
-                <div class="container">
-
-                    <p class="section-subtitle">Juegos Recientes</p>
-
-                    <h2 class="h2 section-title">
-                        Muchos <span class="span">Juegos</span>
-                    </h2>
-
-                    <ul class="has-scrollbar">
-
-                        <li class="scrollbar-item">
-                            <a href="@Url.Action("JuegoVoz", "GameVoz")">
-                                <div class="latest-game-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                                        <img src="~/assets/images/Create a tiger  1.png" width="400" height="470" loading="lazy"
-                                             alt="White Walker Daily" class="img-cover">
-                                    </figure>
-
-                                    <div class="card-content">
-
-                                        <a href="#" class="card-badge skewBg">Adivinanzas</a>
-
-                                        <h3 class="h3">
-                                            <a href="#" class="card-title">Audivina <span class="span"> Animals</span></a>
-                                        </h3>
-
-                                        <p class="card-price">
-                                            Entrada : <span class="span">Gratis</span>
-                                        </p>
-
-                                    </div>
-
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="scrollbar-item">
-                            <a href="@Url.Action("Index", "GameSopaLetras")">
-                                <div class="latest-game-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 360; --height: 430;">
-                                        <img src="~/assets/img/SopaLetra.png" width="400" height="470" loading="lazy"
-                                             alt="Sopa de Letras" class="img-cover">
-                                    </figure>
-
-                                    <div class="card-content">
-
-                                        <a href="#" class="card-badge skewBg">Educativo</a>
-
-                                        <h3 class="h3">
-                                            <a href="#" class="card-title">Sopa de Letras <span class="span">II</span></a>
-                                        </h3>
-
-                                        <p class="card-price">
-                                            Juego Gratis : <span class="span">$0.00</span>
-                                        </p>
-
-                                    </div>
-
-                                </div>
-                            </a>   
-                        </li>
-
-                        <li class="scrollbar-item">
-                            <div class="latest-game-card">
-
-                                <figure class="card-banner img-holder" style="--width: 400; --height: 470;">
-                                    <img src="~/assets/images/Fuzzy baby pand 0.png" width="400" height="470" loading="lazy"
-                                         alt="Cyberpunk Daily" class="img-cover">
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <a href="#" class="card-badge skewBg">Action</a>
-
-                                    <h3 class="h3">
-                                        <a href="#" class="card-title">Cyberpunk <span class="span">Daily</span></a>
-                                    </h3>
-
-                                    <p class="card-price">
-                                        Entry Fee : <span class="span">$25.00</span>
-                                    </p>
-
-                                </div>
-
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </section>
-
-
+<div class="banner">&nbsp;</div>
+<div id="content">
+    <div class="content">
+        <ul>
+            <!-- Los primeros cuatro elementos li se agregarán dinámicamente aquí -->
+        </ul>
+    </div>
+</div>

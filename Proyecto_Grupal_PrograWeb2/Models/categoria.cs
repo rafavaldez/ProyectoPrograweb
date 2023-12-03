@@ -15,7 +15,6 @@ namespace Proyecto_Grupal_PrograWeb2.Models
             juego = new HashSet<juego>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [StringLength(45)]

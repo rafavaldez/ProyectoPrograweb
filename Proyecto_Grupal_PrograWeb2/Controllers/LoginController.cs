@@ -9,7 +9,7 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
 {
     public class LoginController : Controller
     {
-        private usuario objUsuario = new usuario();
+        private usuario objAdmin= new usuario();
         // GET: Login
         public ActionResult Index()
         {
@@ -23,10 +23,10 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
 
         public JsonResult Validar(string Usuario, string Password)
         {
-            var rm = objUsuario.ValidarLogin(Usuario, Password);
+            var rm = objAdmin.ValidarLogin(Usuario, Password);
             if (rm.response)
             {
-                rm.href = Url.Content("/Home/Index2");
+                rm.href = Url.Content("/Home/Index");
             }
             return Json(rm);
         }

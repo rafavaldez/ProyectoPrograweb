@@ -1,32 +1,7 @@
-﻿/* Estilos para el encabezado (nav) */
-.soup-nav {
-    background-color: #333; /* Fondo oscuro para el encabezado */
-    padding: 10px; /* Espaciado interno del encabezado */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Estilos para el encabezado (nav) en tabletas y móviles */
-@media (max-width: 767px) {
-    .soup-nav {
-        font-size: 16px; /* Reducir el tamaño del texto en dispositivos más pequeños si es necesario */
-    }
-}
-
-.regresar-button {
-    color: #000; /* Color del texto Regresar (negro) */
-    font-weight: bold; /* Texto en negrita */
-    font-size: 16px;
-    background-color: #FFA500; /* Fondo anaranjado oscuro */
-    border: none;
-    cursor: pointer;
-    margin-left: auto; /* Mueve el botón a la derecha */
-}
+﻿
 
 /* Estilos para la sección principal */
 .soup-container {
-    background-color: #2c3e50; /* Fondo oscuro para la sección principal */
     padding: 20px; /* Espaciado interno de la sección principal */
     display: flex;
     flex-direction: column;
@@ -51,23 +26,23 @@
 .soup-cell {
     width: 50px;
     height: 50px;
-    background-color: #FFD700; /* Fondo amarillo para los botones */
+    background-color: #7FFF00; /* Fondo amarillo para los botones */
     border: 1px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Transición suave del color de fondo */
+    transition: background-color 0.6s; /* Transición suave del color de fondo */
 }
 
     .soup-cell.selected {
-        background-color: #3498db; /* Color de fondo cuando se selecciona */
+        background-color: #00FFFF; /* Color de fondo cuando se selecciona */
     }
 
 /* Estilos para el botón "Evaluar" */
 .evaluar-button {
-    background-color: #FFD700;
+    background-color: #A52A2A;
     color: #000;
     border: 1px solid #000;
     padding: 10px 20px;
@@ -78,16 +53,9 @@
 }
 
     .evaluar-button:hover {
-        background-color: #FFA500;
+        background-color: #FFE4C4;
     }
 
-/* Estilos para el pie de página (footer) */
-.soup-footer {
-    background-color: #FFD700; /* Fondo amarillo para el footer */
-    color: #333; /* Texto oscuro en el footer */
-    text-align: center;
-    padding: 20px;
-}
 
 /* Otros estilos de texto */
 .soup-content p {
@@ -95,39 +63,39 @@
     font-weight: bold; /* Texto en negrita */
 }
 
-/* Eliminar el borde blanco en el cuerpo, encabezado y pie de página */
-body, .soup-nav, .soup-footer {
-    border: none;
-}
-
 
 
 /* Estilos para el cuadro de diálogo */
 .custom-modal {
     display: none;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Puedes ajustar este valor según tus preferencias */
+    height: 100%; /* Igualar al valor de width para hacerlo cuadrado */
     background-color: rgba(0, 0, 0, 0.7); /* Fondo oscurecido */
     z-index: 1;
 }
 
+
 .modal-content {
-    background-color: #FFD700; /* Cambiar a amarillo oscuro */
-    margin: 15% auto;
+    background-color: #90EE90;
+    margin: 15% auto; /* Ajusta el margen para centrar verticalmente */
     padding: 20px;
     border: 1px solid #888;
-    max-width: 50%; /* Cambiar a 'max-width' para adaptarse al contenido */
+    width: 5cm; /* 4cm de cada lado (4cm + 13cm + 4cm) */
+    height: 1.5cm; /* 5cm de largo */
     text-align: center;
     border-radius: 10px;
     position: relative;
 }
 
     .modal-content p {
-        font-family: 'Helvetica', sans-serif; /* Cambiar a Helvetica o la fuente deseada */
-        font-weight: bold; /* Texto en negrita */
+        font-family: 'Helvetica', sans-serif;
+        font-weight: bold;
+        overflow-y: auto; /* Agrega esta línea para permitir el desplazamiento vertical */
     }
 
 .close {

@@ -1,15 +1,31 @@
 ﻿
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
     <style>
-        body {
-            background-color: #333; /* Fondo oscuro */
-            color: #FFFF00; /* Texto amarillo oscuro */
-            text-align: center; /* Centrar el texto */
+        .soup-container {
+            padding: 20px; /* Espaciado interno de la sección principal */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 40vh;
         }
+
+        .btn-info {
+            margin-bottom: 10px;
+            text-align: center;
+            font-family: 'Lato';
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            font-size: 1.5em;
+            color: #000;
+        }
+
 
         form {
             display: inline-block; /* Alinear en el centro */
@@ -35,21 +51,18 @@
             button[value="Dificil"] {
                 background-color: #FF0000; /* Fondo rojo para el botón DIFICIL */
             }
-
-        label {
-            color: #FFFF00; /* Texto amarillo oscuro para la etiqueta */
-        }
     </style>
 </head>
 
-<body>
-    <h2 class="titulo">Selecciona un nivel de dificultad</h2>
+<div class="soup-container">
+    <h2 class="btn-info">Selecciona un nivel de dificultad Para el Juego Sopa de Letras</h2>
 
     <form method="post" action="@Url.Action("SeleccionarNivel", "GameSopaLetras")">
-        <label class="etiqueta">Selecciona un nivel de dificultad:</label>
         <br />
         <button type="submit" name="nivel" value="Facil" class="boton-facil">Fácil</button>
         <button type="submit" name="nivel" value="Normal" class="boton-normal">Normal</button>
         <button type="submit" name="nivel" value="Dificil" class="boton-dificil">Difícil</button>
     </form>
-</body>
+</div>
+
+

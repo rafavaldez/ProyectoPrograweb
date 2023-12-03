@@ -8,102 +8,118 @@
 
 
 <head>
+
     <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
     <title>Index</title>
     @*<link rel="stylesheet" href="~/assetslogin/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
         <link rel="stylesheet" href="~/assetslogin/fonts/fontawesome-all.min.css">*@
     <!--Jqryform-->
     @*<script src="~/assetslogin/js/jquery.form.js"></script>*@
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+    <link rel="canonical" href="https://codepen.io/joshsorosky/pen/gaaBoB">
+
     <link href="~/assetslogin/css/Login.css" rel="stylesheet" />
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
 </head>
 
+<body>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
+    <div class="container">
+        <div class="frame">
+            <div class="nav">
+                <ul class"links">
+                    <li class="signin-active"><a class="btn">Sign in</a></li>
+                    <li class="signup-inactive"><a class="btn">Sign up </a></li>
+                </ul>
+            </div>
+            <div ng-app ng-init="checked = false">
+                <form class="form-signin" action="@Url.Action("Validar", "Login")" method="post" name="form">
 
-<div class="container">
-    <div class="frame">
-        <div class="nav">
-            <ul class"links">
-                <li class="signin-active"><a class="btn">Sign in</a></li>
-                <li class="signup-inactive"><a class="btn">Sign up </a></li>
-                @*<li class="signin-active" id="signin-li"><a class="btn" onclick="toggleForms('signin')">Sign in</a></li>
-                    <li class="signup-inactive" id="signup-li"><a class="btn" onclick="toggleForms('signup')">Sign up</a></li>*@
-            </ul>
-        </div>
-        <div ng-app ng-init="checked = false">
-            <form class="form-signin" action="@Url.Action("Validar", "Login")" method="post" name="form">
+                    <label for="username">Correo</label>
+                    <input class="form-styling" type="text" name="email" placeholder="" />
+                    <label for="password">Contraseña</label>
+                    <input class="form-styling" type="text" name="password" placeholder="" />
+                    <div class="btn-animate">
+                        <a class="btn-signin">Ingresar</a>
+                    </div>
+                </form>
 
-                <label for="username">Correo</label>
-                <input class="form-styling" type="text" name="email" placeholder="" />
-                <label for="password">Contraseña</label>
-                <input class="form-styling" type="text" name="password" placeholder="" />
-                <div class="btn-animate">
-                    <a class="btn-signin">Sign in</a>
-                </div>
-            </form>
+                <form class="form-signup" action="@Url.Action("Guardar", "USUARIO")" method="post" name="form">
+                    @Html.HiddenFor(x => x.id)
+                    <label for="fullname">Nombre</label>
+                    <input class="form-styling" type="text" name="nombre" placeholder="" />
+                    <label for="fullname">Apellido</label>
+                    <input class="form-styling" type="text" name="apellido" placeholder="" />
+                    <label for="email">Email</label>
+                    <input class="form-styling" type="text" name="email" placeholder="" />
+                    <label for="password">Password</label>
+                    <input class="form-styling" type="text" name="password" placeholder="" />
+                    <input type="hidden" name="estado" value="A" />
+                    <a ng-click="checked = !checked" class="btn-signup">Registrar</a>
+                </form>
 
-            <form class="form-signup" action="@Url.Action("Guardar", "USUARIO")" method="post" name="form">
-                @Html.HiddenFor(x => x.id)
-                <label for="fullname">Nombre</label>
-                <input class="form-styling" type="text" name="nombre" placeholder="" />
-                <label for="fullname">Apellido</label>
-                <input class="form-styling" type="text" name="apellido" placeholder="" />
-                <label for="email">Email</label>
-                <input class="form-styling" type="text" name="email" placeholder="" />
-                <label for="password">Password</label>
-                <input class="form-styling" type="text" name="password" placeholder="" />
-                <input type="hidden" name="estado" value="A" />
-                <a ng-click="checked = !checked" class="btn-signup">Sign Up</a>
-            </form>
-
-            <div class="success">
-                <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
-                    <path fill="#ffffff" d="M40.61,23.03L26.67,36.97L13.495,23.788c-1.146-1.147-1.359-2.936-0.504-4.314
+                <div class="success">
+                    <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
+                        <path fill="#ffffff" d="M40.61,23.03L26.67,36.97L13.495,23.788c-1.146-1.147-1.359-2.936-0.504-4.314
                   c3.894-6.28,11.169-10.243,19.283-9.348c9.258,1.021,16.694,8.542,17.622,17.81c1.232,12.295-8.683,22.607-20.849,22.042
                   c-9.9-0.46-18.128-8.344-18.972-18.218c-0.292-3.416,0.276-6.673,1.51-9.578" />
-                    <div class="successtext">
-                        <p> Thanks for signing up! Check your email for confirmation.</p>
-                    </div>
+                        <div class="successtext">
+                            <p> Gracias por Registrar su Cuenta.</p>
+                        </div>
+                </div>
+            </div>
+
+            <div class="forgot">
+                <a href="#">Forgot your password?</a>
+            </div>
+
+            <div>
+                <div class="cover-photo"></div>
+                <div class="profile-photo"></div>
+                <h1 class="welcome">Welcome, Chris</h1>
+                <a class="btn-goback" value="Refresh" onClick="history.go()">Go back</a>
             </div>
         </div>
 
-
-    </div>
-
-    <a id="refresh" value="Refresh" onClick="history.go()">
-        <svg class="refreshicon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;"
-             xml:space="preserve">
-        <path d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
+        <a id="refresh" value="Refresh" onClick="history.go()">
+            <svg class="refreshicon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;"
+                 xml:space="preserve">
+            <path d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
                 c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
                 c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
                 c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
                 c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
                 l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z" />
     </svg>
-    </a>
-</div>
+        </a>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+</body>
+
 
 <!--Login-->
 @*<script src="~/assetslogin/js/ini.js"></script>
     <script src="~/assetslogin/js/jquery.validate.min.js"></script>
     <script src="~/assetslogin/js/jquery.validate.unobtrusive.min.js"></script>*@
 
-<script>
-    //function toggleForms(formType) {
-    //    if (formType === 'signin') {
-    //        $("#signin-li").addClass("signin-active").removeClass("signup-inactive");
-    //        $("#signup-li").addClass("signup-inactive").removeClass("signin-active");
-    //    } else if (formType === 'signup') {
-    //        $("#signin-li").addClass("signin-inactive").removeClass("signin-active");
-    //        $("#signup-li").addClass("signup-active").removeClass("signup-inactive");
-    //    }
-
-    //    // Aquí puedes agregar lógica adicional, como cambiar la visibilidad de los formularios
-    //}
-
+<script id="rendered-js">
     $(function () {
         $(".btn").click(function () {
             $(".form-signin").toggleClass("form-signin-left");

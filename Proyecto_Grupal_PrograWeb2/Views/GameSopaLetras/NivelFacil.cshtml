@@ -1,24 +1,22 @@
-﻿@{
-    Layout = null;
+﻿
+@{
+    ViewBag.Title = "NivelFacil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     string[] palabras = ViewBag.Palabras as string[];
     List<string[]> letrasSeparadas = ViewBag.LetrasSeparadas as List<string[]>;
 
     Random random = new Random();
+
 }
 
-<!DOCTYPE html>
-<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="~/assets/css/sopa-de-letras.css" />
-    <title>Index</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Sopa de Letras - Nivel Facil</title>
 </head>
-<body>
-    <!-- Encabezado (nav) con el botón "Regresar" -->
-    <nav class="soup-nav">
-        <button href="@Url.Action("Index", "Home")" class="regresar-button">Regresar</button>
-    </nav>
-
+<div>
     <!-- Contenedor principal -->
     <div class="soup-container">
         <!-- Encabezado de la sopa de letras -->
@@ -50,11 +48,7 @@
             <button id="evaluar-button" class="evaluar-button" onclick="evaluarPalabras()"><b>Evaluar</b></button>
         </div>
     </div>
-
-    <!-- Pie de página (footer) -->
-    <footer class="soup-footer">
-        <!-- Contenido del footer -->
-    </footer>
+   
     <!-- Modal oculto -->
     <div class="custom-modal" id="custom-modal">
         <div class="modal-content">
@@ -74,8 +68,8 @@
             <p id="sin-intentos-message">Ya no te quedan más intentos.</p>
         </div>
     </div>
-</body>
-</html>
+</div>
+
 <script>
     var palabrasValidas = @Html.Raw(Json.Encode(ViewBag.Palabras));
     let intentosRestantes = 3; // Establece el número de intentos permitidos
@@ -100,7 +94,6 @@
     }
 
     function evaluarPalabras() {
-        /*const palabrasValidas = ["LEON", "MONO", "GATO", "PERRO", "ELEFANTE"];*/
         const palabrasEncontradas = [];
 
         letrasSeleccionadas.forEach(letra => {
@@ -114,6 +107,7 @@
         if (palabrasEncontradas.length === palabrasValidas.length) {
             /*alert('¡Encontraste todas las palabras!');*/
             /*mostrarMensaje();*/
+            actualizarPuntaje(50); // 50 es el puntaje para este nivel
             reiniciarTabla1();
         } else {
             intentosRestantes--;
@@ -194,5 +188,25 @@
         ocultarMensaje("sin-intentos-modal");
     }
 
+    // Función para actualizar el puntaje mediante una solicitud AJAX
+    function actualizarPuntaje(nuevoPuntaje) {
+        // Realizar una solicitud AJAX al controlador
+        $.ajax({
+            type: "POST",
+            url: "/GameSopaLetras/ActualizarPuntaje",
+            data: { puntaje: nuevoPuntaje },
+            success: function (respuesta) {
+                // Manejar la respuesta del servidor si es necesario
+                console.log("Puntaje actualizado con éxito");
+            },
+            error: function (error) {
+                // Manejar errores si es necesario
+                console.error("Error al actualizar el puntaje", error);
+            }
+        });
+    }
+
 </script>
+
+
 
