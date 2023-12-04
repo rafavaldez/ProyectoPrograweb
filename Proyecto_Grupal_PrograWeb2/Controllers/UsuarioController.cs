@@ -30,7 +30,7 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
                 );
         }
 
-        public ActionResult Guardar(usuario objUsuario)
+        public ActionResult Guardar(usuario objAdmin)
         {
             if (ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             }
             else
             {
-                return View("~/Views/USUARIO/AgregarEditar.cshtml", objUsuario);
+                return View("~/Views/USUARIO/AgregarEditar.cshtml", objAdmin);
             }
         }
 

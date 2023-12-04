@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared3/_Layout.cshtml";
+}
+
+<div id="body">
+    <div id="content">
+        <div class="search">
+            <input type="text" name="s" value="Find">
+            <button>&nbsp;</button>
+            <label for="articles">
+                <input type="radio" id="articles">
+                Articles
+            </label>
+            <label for="products">
+                <input type="radio" id="products" checked>
+                PetMart Products
+            </label>
+        </div>
+        <div class="content">
+            <ul>
+                <!-- Aquí se agregarán dinámicamente los elementos li -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var jsonString = '@Html.Raw(ViewBag.JsonData)';
+        var jsonData = JSON.parse(jsonString);
+
+        // Obtén la referencia al elemento ul en el DOM
+        var ulElement = document.querySelector('#content .content ul');
+
+        // Itera sobre los primeros cuatro datos y agrega elementos li al ul
+        for (var i = 0; i < jsonData.length; i++) {
+            var animal = jsonData[i];
+
+            // Crea un nuevo elemento li
+            var liElement = document.createElement('li');
+
+            // Agrega el contenido al li
+            liElement.innerHTML = `
+                <a href="/Animales/About2/${animal._id}"><img src="${animal.image_url}" width="140" height="250" alt=""></a>
+                <h2>${animal.name}</h2>
+                <span>${animal.description}</span>
+                <span><a class="more" href="/Animales/About2/${animal._id}">View all</a></span>
+            `;
+
+            // Agrega el li al ul
+            ulElement.appendChild(liElement);
+        }
+    });
+</script>
+

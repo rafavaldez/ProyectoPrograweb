@@ -9,7 +9,8 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
 {
     public class LoginController : Controller
     {
-        private usuario objUsuario = new usuario();
+        private usuario objAdmin= new usuario();
+        private admin administrador = new admin();
         // GET: Login
         public ActionResult Index()
         {
@@ -21,9 +22,29 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             return View();
         }
 
+        public ActionResult IndexLoger()
+        {
+            return View();
+        }
+
+        public ActionResult Index2Loger2()
+        {
+            return View();
+        }
+
         public JsonResult Validar(string Usuario, string Password)
         {
-            var rm = objUsuario.ValidarLogin(Usuario, Password);
+            var rm = objAdmin.ValidarLogin(Usuario, Password);
+            if (rm.response)
+            {
+                rm.href = Url.Content("/Home/Index");
+            }
+            return Json(rm);
+        }
+
+        public JsonResult ValidarAdmin(string Usuario, string Password)
+        {
+            var rm = administrador.ValidarLogin(Usuario, Password);
             if (rm.response)
             {
                 rm.href = Url.Content("/Home/Index2");

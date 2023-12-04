@@ -5,7 +5,6 @@ namespace Proyecto_Grupal_PrograWeb2.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using System.Data.Entity.Validation;
     using System.Linq;
 
     [Table("score")]
@@ -25,14 +24,54 @@ namespace Proyecto_Grupal_PrograWeb2.Models
 
         public virtual usuario usuario { get; set; }
 
+        public List<score> ObtenerScoresTodos()
+        {
+            var scores = new List<score>();
+            try
+            {
+                using (var db = new ModeloSistema())
+                {
+                    // Filtra todos los scores de todos los usuarios
+                    scores = db.score
+                        .Include("usuario")
+                        .Include("juego")
+                     
+                        .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        
+            return scores;
+        }
 
 
+        public List<score> ObtenerScoresPorUsuario()
+        {
+            var scores = new List<score>();
+            var userId = Convert.ToInt32(SessionHelper.GetUser());
+            try
+            {
+                using (var db = new ModeloSistema())
+                {
+                    // Filtra los scores por usuarioId y también incluye información sobre el usuario y el juego
+                    scores = db.score
+                        .Include("usuario")
+                        .Include("juego")
+                        .Where(s => s.usuario_id == userId)
+                        .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+            return scores;
+        }
 
 
     }
-
-
 }

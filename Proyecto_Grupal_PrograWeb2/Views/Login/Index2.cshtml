@@ -1,139 +1,119 @@
-﻿@model Proyecto_Grupal_PrograWeb2.Models.usuario
-
+﻿
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
-
+<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    @*<link rel="stylesheet" href="~/assetslogin/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-        <link rel="stylesheet" href="~/assetslogin/fonts/fontawesome-all.min.css">*@
-    <!--Jqryform-->
-    @*<script src="~/assetslogin/js/jquery.form.js"></script>*@
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link href="~/assetslogin/css/Login.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assetslogin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="~/assetslogin/fonts/fontawesome-all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--ResponseModel-->
+    <script src="~/assetslogin/js/jquery-3.7.1.min.js"></script>
 </head>
+<body>
+    <style>
+    .divider:after,
+    .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+    }
+    .h-custom {
+    height: calc(100% - 73px);
+    align-content:center;
+    }
+    @*@media (max-width: 450px) {
+    .h-custom {
+    height: 100%;
+    }
+    }*@
+
+        .bg-green {
+            background-color: #4BE810;
+        }
+    </style>
 
 
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <center>
+                <h2>LOGIN - ADMINISTRADOR</h2>
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    @*<div class="col-md-9 col-lg-6 col-xl-5">
+                            <img src="~/Img/logo_Glorieta.png" class="img-fluid" alt="Sample image">
+                        </div>*@
+                    @using (Html.BeginForm("ValidarAdmin", "Login", FormMethod.Post))
+                    {
+                        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
 
-<div class="container">
-    <div class="frame">
-        <div class="nav">
-            <ul class"links">
-                <li class="signin-active"><a class="btn">Sign in</a></li>
-                <li class="signup-inactive"><a class="btn">Sign up </a></li>
-                @*<li class="signin-active" id="signin-li"><a class="btn" onclick="toggleForms('signin')">Sign in</a></li>
-                    <li class="signup-inactive" id="signup-li"><a class="btn" onclick="toggleForms('signup')">Sign up</a></li>*@
-            </ul>
-        </div>
-        <div ng-app ng-init="checked = false">
-            <form class="form-signin" action="@Url.Action("Validar", "Login")" method="post" name="form">
+                            <div class="divider d-flex align-items-center my-4">
+                                <img src="~/assets/img/logohua.png" class="img-fluid" alt="Sample image" style="max-width: 650px; max-height: 400px;">
+                            </div>
 
-                <label for="username">Correo</label>
-                <input class="form-styling" type="text" name="email" placeholder="" />
-                <label for="password">Contraseña</label>
-                <input class="form-styling" type="text" name="password" placeholder="" />
-                <div class="btn-animate">
-                    <a class="btn-signin">Sign in</a>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input name="Usuario" type="text" id="form3Example3" class="form-control form-control-lg"
+                                       placeholder="Ingrese su Usuario" />
+                                <label class="form-label" for="form3Example3">Usuario</label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-3">
+                                <input name="Password" type="text" id="form3Example4" class="form-control form-control-lg"
+                                       placeholder="Ingrese su Password" />
+                                <label class="form-label" for="form3Example4">Password</label>
+                            </div>
+                            <div class="text-center text-lg-start mt-4 pt-2 align-content-center">
+                                <button data-ajax="true" type="button" class="btn btn-primary btn-lg"
+                                        style="padding-left: 3rem; padding-right: 3rem;">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </form>
-
-            <form class="form-signup" action="@Url.Action("Guardar", "USUARIO")" method="post" name="form">
-                @Html.HiddenFor(x => x.id)
-                <label for="fullname">Nombre</label>
-                <input class="form-styling" type="text" name="nombre" placeholder="" />
-                <label for="fullname">Apellido</label>
-                <input class="form-styling" type="text" name="apellido" placeholder="" />
-                <label for="email">Email</label>
-                <input class="form-styling" type="text" name="email" placeholder="" />
-                <label for="password">Password</label>
-                <input class="form-styling" type="text" name="password" placeholder="" />
-                <input type="hidden" name="estado" value="A" />
-                <a ng-click="checked = !checked" class="btn-signup">Sign Up</a>
-            </form>
-
-            <div class="success">
-                <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
-                    <path fill="#ffffff" d="M40.61,23.03L26.67,36.97L13.495,23.788c-1.146-1.147-1.359-2.936-0.504-4.314
-                  c3.894-6.28,11.169-10.243,19.283-9.348c9.258,1.021,16.694,8.542,17.622,17.81c1.232,12.295-8.683,22.607-20.849,22.042
-                  c-9.9-0.46-18.128-8.344-18.972-18.218c-0.292-3.416,0.276-6.673,1.51-9.578" />
-                    <div class="successtext">
-                        <p> Thanks for signing up! Check your email for confirmation.</p>
-                    </div>
-            </div>
+            </center>
         </div>
-
-
-    </div>
-
-    <a id="refresh" value="Refresh" onClick="history.go()">
-        <svg class="refreshicon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;"
-             xml:space="preserve">
-        <path d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
-                c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
-                c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
-                c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
-                c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
-                l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z" />
-    </svg>
-    </a>
-</div>
-
-<!--Login-->
-@*<script src="~/assetslogin/js/ini.js"></script>
+        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-green">
+            <!-- Copyright -->
+            <div class="text-white mb-3 mb-md-0">
+                Copyright © 2023. All rights reserved.
+            </div>
+            <!-- Copyright -->
+            <!-- Right -->
+            <div>
+                <a href="https://www.facebook.com/zoohuachipa/?locale=es_LA" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/pzhuachipa" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                @*<a href="#!" class="text-white">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>*@
+            </div>
+            <!-- Right -->
+        </div>
+    </section>
+    @*@RenderBody()*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/signalr.js/2.4.1/jquery.signalR.min.js"></script>*@
+    <script src="~/assetslogin/js/chart.min.js"></script>
+    <script src="~/assetslogin/js/bs-init.js"></script>
+    <script src="~/assetslogin/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assetslogin/js/theme.js"></script>
+    <script src="~/assetslogin/js/ini.js"></script>
+    <script src="~/assetslogin/js/jquery.form.js"></script>
     <script src="~/assetslogin/js/jquery.validate.min.js"></script>
-    <script src="~/assetslogin/js/jquery.validate.unobtrusive.min.js"></script>*@
-
-<script>
-    //function toggleForms(formType) {
-    //    if (formType === 'signin') {
-    //        $("#signin-li").addClass("signin-active").removeClass("signup-inactive");
-    //        $("#signup-li").addClass("signup-inactive").removeClass("signin-active");
-    //    } else if (formType === 'signup') {
-    //        $("#signin-li").addClass("signin-inactive").removeClass("signin-active");
-    //        $("#signup-li").addClass("signup-active").removeClass("signup-inactive");
-    //    }
-
-    //    // Aquí puedes agregar lógica adicional, como cambiar la visibilidad de los formularios
-    //}
-
-    $(function () {
-        $(".btn").click(function () {
-            $(".form-signin").toggleClass("form-signin-left");
-            $(".form-signup").toggleClass("form-signup-left");
-            $(".frame").toggleClass("frame-long");
-            $(".signup-inactive").toggleClass("signup-active");
-            $(".signin-active").toggleClass("signin-inactive");
-            $(".forgot").toggleClass("forgot-left");
-            $(this).removeClass("idle").addClass("active");
-        });
-    });
-
-    $(function () {
-        $(".btn-signup").click(function () {
-            $(".nav").toggleClass("nav-up");
-            $(".form-signup-left").toggleClass("form-signup-down");
-            $(".success").toggleClass("success-left");
-            $(".frame").toggleClass("frame-short");
-        });
-    });
-
-    $(function () {
-        $(".btn-signin").click(function () {
-            $(".btn-animate").toggleClass("btn-animate-grow");
-            $(".welcome").toggleClass("welcome-left");
-            $(".cover-photo").toggleClass("cover-photo-down");
-            $(".frame").toggleClass("frame-short");
-            $(".profile-photo").toggleClass("profile-photo-down");
-            $(".btn-goback").toggleClass("btn-goback-up");
-            $(".forgot").toggleClass("forgot-fade");
-        });
-    });
-</script>
+    <script src="~/assetslogin/js/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="~/signalr/hubs"></script>*@
+</body>
+</html>

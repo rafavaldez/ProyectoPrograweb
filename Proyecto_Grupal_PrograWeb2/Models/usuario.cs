@@ -39,7 +39,6 @@ namespace Proyecto_Grupal_PrograWeb2.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<score> score { get; set; }
-
         //metodos
         //Listar
 
@@ -159,7 +158,7 @@ namespace Proyecto_Grupal_PrograWeb2.Models
             return rm;
         }
 
-        
+
 
 
         public void GuardarPuntajeEnBD(double puntos, int nivel, int juegoid)

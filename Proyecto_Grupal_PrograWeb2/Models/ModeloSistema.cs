@@ -28,6 +28,10 @@ namespace Proyecto_Grupal_PrograWeb2.Models
                 .Property(e => e.contra)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<admin>()
+                .Property(e => e.avatar)
+                .IsUnicode(false);
+
             modelBuilder.Entity<categoria>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);

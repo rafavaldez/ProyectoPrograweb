@@ -3,7 +3,7 @@
     ViewBag.Title = "Dificil";
 }
 
-<h2>Dificil</h2>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/trontastic/jquery-ui.css">
@@ -24,6 +24,7 @@
         background-color: transparent;
         transition: none;
     }
+
     h2 {
         font-family: 'Press Start 2P', cursive;
         font-size: 32px;
@@ -41,9 +42,11 @@
         border: 4px solid #ff6600 !important;
         border-radius: 10px !important;
         padding: 20px !important;
-        height: 110vh !important;
+        height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
+        background: url('../../assets/images/fondo.jpg') !important;
+        z-index: 2;
     }
 
     .header-section {
@@ -98,10 +101,10 @@
 
 <main>
     <article>
-        <section class="section hero" id="home" aria-label="home" style="background-image: url('~/assets/images/hero-bg.jpg')">
+        <section class="section hero" id="home" aria-label="home" style="background-image: url('~/assets/~/assets/images/hero-bg.jpg')">
             <div class="container game-frame">
 
-                <h1>ADIVINA LA BANDERA</h1>
+                <h1>NIVEL DIFICIL</h1>
 
                 <!-- Pantalla inicial -->
                 <div id="pantalla-inicial">
@@ -271,7 +274,7 @@
         //agreamos los resultados
         document.getElementById("numCorrectas").innerHTML = cantidadAcertadas;
 
-        var nivel = 1; // Supongamos que es el nivel 1
+        var nivel = 3; // Supongamos que es el nivel 1
         var puntos = 10 * cantidadAcertadas; // Puntos fijos
         var juegoid = 2;
         guardarPuntajeEnBD(nivel, puntos, juegoid);

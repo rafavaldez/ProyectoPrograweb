@@ -54,19 +54,16 @@ namespace Proyecto_Grupal_PrograWeb2.Controllers
             return View();
         }
 
-        public ActionResult Puzzle3()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Puzzle4()
+        public ActionResult IndexPuzzle()
         {
             return View();
         }
 
-        public ActionResult Puzzle5()
-        {
-            return View();
-        }
+
     }
 }

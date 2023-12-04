@@ -1,0 +1,137 @@
+﻿@model List<Proyecto_Grupal_PrograWeb2.Models.score>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+</style>
+
+<div id="content">
+    <div class="content">
+        <div class="about">
+            <h2>Resultados por Juegos</h2>
+            <ul>
+                <table id="tabla">
+                    <thead>
+                        <tr>
+                            <th>Juego</th>
+                            <th>Total Puntos</th>
+                            <th>Niveles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- AQUÍ SE GENERARÁ LA TABLA CON JAVASCRIPT -->
+                    </tbody>
+                </table>
+                <br />
+                <br />
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var jsonData = [
+    @foreach (var juegoGroup in Model.GroupBy(m => m.juego.nombre))
+    {
+        var totalPuntos = juegoGroup.Sum(m => m.puntos);
+        var niveles = juegoGroup.Select(m => new { nivel = m.nivel, puntos = m.puntos });
+
+        @Html.Raw("{")
+        @Html.Raw($"\"juegoNombre\": \"{juegoGroup.Key}\",")
+        @Html.Raw($"\"totalPuntos\": {totalPuntos},")
+        @Html.Raw("\"niveles\": [")
+
+        foreach (var nivel in niveles)
+        {
+            @Html.Raw("{")
+            @Html.Raw($"\"nivel\": {nivel.nivel},")
+            @Html.Raw($"\"puntos\": {nivel.puntos}")
+            @Html.Raw("},")
+        }
+
+        @Html.Raw("]")
+        @Html.Raw("},")
+    }
+];
+
+console.log(jsonData); // Muestra el JSON en la consola para verificar
+var tabla = $('#tabla tbody');
+
+jsonData.forEach(juego => {
+    var row = $('<tr>');
+
+    var cellJuego = $('<td>').text(juego.juegoNombre);
+    row.append(cellJuego);
+
+    var cellTotalPuntos = $('<td>').text(juego.totalPuntos);
+    row.append(cellTotalPuntos);
+
+    var cellNiveles = $('<td>').html(juego.niveles.map(nivel => `Nivel ${nivel.nivel}: ${nivel.puntos} puntos`).join('<br>'));
+    row.append(cellNiveles);
+
+    tabla.append(row);
+});
+
+// Agregar eventos de clic y doble clic usando jQuery
+tabla.on('click', 'tr', function () {
+    // Desmarcar todas las filas
+    tabla.find('tr').removeClass('selected');
+    // Marcar la fila seleccionada
+    $(this).addClass('selected');
+});
+
+tabla.on('dblclick', 'tr', function () {
+    var juegoNombre = $(this).find('td:first').text();
+    // Redireccionar a la URL con el nombre del juego usando POST
+   window.location.href = '@Url.Action("reportU", "ReporteUsuario")?juegoNombre=' + juegoNombre;
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
